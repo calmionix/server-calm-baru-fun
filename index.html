@@ -87,56 +87,25 @@ opacity:1;
 visibility:visible;
 }
 
-/* ================= HERO ================= */
-
-.hero{
-position:relative;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-overflow:hidden;
-}
-
-.hero-bg{
-position:absolute;
-width:110%;
-height:110%;
-background:url('assets/hero-bg.png') center/cover no-repeat;
-transform:translateZ(0);
-will-change:transform;
-}
-
-.hero-content{
-position:relative;
-z-index:2;
-}
+/* ================= HERO UPGRADE ================= */
 
 .hero-content img.logo{
-width:320px;
-margin-bottom:20px;
+width:420px;      /* Lebih gede */
+max-width:90%;
+margin-bottom:25px;
+filter:drop-shadow(0 0 25px rgba(0,191,255,0.4));
 }
 
 .hero-content img.ipbox{
-width:360px;
+width:420px;      /* Samain biar balance */
+max-width:90%;
 cursor:pointer;
 transition:0.3s;
 }
 
 .hero-content img.ipbox:hover{
-transform:scale(1.05);
-}
-
-section{
-padding:90px 8%;
-}
-
-h2{
-text-align:center;
-font-size:40px;
-margin-bottom:40px;
-font-weight:800;
+transform:scale(1.08);
+filter:drop-shadow(0 0 20px #00bfff);
 }
 
 /* ================= STATUS ================= */
@@ -290,23 +259,42 @@ transform:translateY(-5px);
 filter:drop-shadow(0 0 12px #00bfff);
 }
 
-/* ================= ADMIN ================= */
+/* ================= ADMIN FIX 1:1 ================= */
 
 .admin-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:25px;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:30px;
+max-width:1100px;
+margin:auto;
 }
 
-.admin-grid img{
+.admin-card{
+text-align:center;
+}
+
+.admin-card img{
 width:100%;
+aspect-ratio:1/1;     /* Bikin 1:1 */
+object-fit:cover;     /* Biar gak gepeng */
 border-radius:20px;
 transition:0.3s;
 }
 
-.admin-grid img:hover{
-transform:translateY(-5px);
-box-shadow:0 0 20px #00bfff;
+.admin-card img:hover{
+transform:translateY(-6px);
+box-shadow:0 0 25px #00bfff;
+}
+
+.admin-card h3{
+margin-top:12px;
+font-weight:700;
+font-size:18px;
+}
+
+.admin-card p{
+opacity:0.8;
+font-size:14px;
 }
 
 /* ================= RANK ================= */
@@ -424,9 +412,56 @@ border-radius:20px;
 /* ================= RESPONSIVE ================= */
 
 @media(max-width:768px){
-.hero-content img.logo{ width:220px; }
-.hero-content img.ipbox{ width:260px; }
+
+.hero-content img.logo{
+width:280px;
 }
+
+.hero-content img.ipbox{
+width:280px;
+}
+
+.admin-grid{
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+}
+
+}
+
+/* ================= PAGE LOAD ANIMATION ================= */
+
+body{
+opacity:0;
+transition:opacity 0.8s ease;
+}
+
+body.loaded{
+opacity:1;
+}
+
+/* Fade Up Animation */
+.fade-up{
+opacity:0;
+transform:translateY(40px);
+transition:all 0.9s cubic-bezier(.17,.67,.83,.67);
+}
+
+.fade-up.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* Hero Animation */
+.hero-content{
+opacity:0;
+transform:scale(0.95);
+transition:all 1s ease;
+}
+
+.hero-content.show{
+opacity:1;
+transform:scale(1);
+}
+
 </style>
 </head>
 
@@ -458,7 +493,7 @@ border-radius:20px;
 </div>
 </section>
 
-<section class="status" id="status">
+<section class="fade-up" id="status">
 <h2>Server Status</h2>
 
 <p style="max-width:700px;margin:auto;font-size:16px;opacity:0.85">
@@ -483,7 +518,7 @@ Vote Server
 
 </section>
 
-<section id="fitur">
+<section class="fade-up" id="fitur">
 <h2>Fitur Unggulan</h2>
 
 <div class="fitur-grid">
@@ -503,7 +538,7 @@ Vote Server
 </div>
 </section>
 
-<section id="galeri">
+<section class="fade-up" id="galeri">
 <h2>Galeri Server</h2>
 
 <div class="gallery-wrapper">
@@ -566,7 +601,7 @@ Vote Server
 </div>
 </section>
 
-<section class="owner" id="owner">
+<section class="fade-up owner" id="owner">
 <h2>Owner Server</h2>
 <img src="assets/owner.png" class="main">
 <div class="social-icons">
@@ -578,7 +613,7 @@ Vote Server
 </div>
 </section>
 
-<section id="admin">
+<section class="fade-up" id="admin">
 <h2>Admin List</h2>
 <div class="admin-grid">
 
@@ -609,7 +644,7 @@ Vote Server
 </div>
 </section>
 
-<section id="rank">
+<section class="fade-up" id="rank">
 <h2>Rank Server</h2>
 <div class="rank-grid">
 <div class="rank-card">
@@ -627,7 +662,7 @@ Vote Server
 </div>
 </section>
 
-<section id="rate">
+<section class="fade-up" id="rate">
 <h2>Rate Card</h2>
 <div class="rate-grid">
 <div class="rate-card" onclick="waRate('TikTok')">TikTok Promotion</div>
@@ -701,6 +736,26 @@ scrollTop.style.display="none";
 }
 });
 </script>
+
+/* ================= PAGE LOAD EFFECT ================= */
+
+window.addEventListener("load", () => {
+document.body.classList.add("loaded");
+
+// Hero muncul duluan
+setTimeout(() => {
+document.querySelector(".hero-content").classList.add("show");
+}, 200);
+
+// Section muncul bertahap
+const sections = document.querySelectorAll(".fade-up");
+
+sections.forEach((section, index) => {
+setTimeout(() => {
+section.classList.add("show");
+}, 400 + (index * 150));
+});
+});
 
 </body>
 </html>
