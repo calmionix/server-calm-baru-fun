@@ -151,26 +151,37 @@ font-size:20px;
 margin-top:15px;
 }
 
-/* ================= FITUR UPGRADE ================= */
+/* ================= FITUR FIX ================= */
+
+#fitur{
+max-width:1100px;
+margin:auto;
+}
+
+.fitur-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+}
 
 .fitur-card{
 background:#112b45;
-padding:20px;
+padding:18px;
 border-radius:20px;
 text-align:center;
 transition:0.3s;
 }
 
 .fitur-card:hover{
-transform:translateY(-5px);
+transform:translateY(-6px);
 box-shadow:0 0 25px #00bfff;
 }
 
 .fitur-card img{
 width:100%;
-height:180px;
+aspect-ratio:16/9;
 object-fit:cover;
-border-radius:18px;
+border-radius:16px;
 margin-bottom:15px;
 }
 
@@ -181,24 +192,31 @@ display:-webkit-box;
 -webkit-line-clamp:2;
 -webkit-box-orient:vertical;
 overflow:hidden;
-min-height:42px;
+min-height:40px;
 }
+  
+/* ================= GALERI FIX ================= */
 
-/* ================= GALERI UPGRADE ================= */
+.gallery-wrapper{
+overflow:hidden;
+max-width:1100px;
+margin:auto;
+}
 
 .gallery-track{
 display:flex;
 gap:20px;
-transition:transform 0.6s ease;
+transition:transform 0.5s ease;
 }
 
 .gallery-item{
 position:relative;
+flex:0 0 300px;
 }
 
 .gallery-item img{
-width:280px;
-height:200px;
+width:100%;
+aspect-ratio:16/9;
 object-fit:cover;
 border-radius:18px;
 transition:0.3s;
@@ -213,20 +231,38 @@ box-shadow:0 0 25px #00bfff;
 position:absolute;
 bottom:10px;
 right:10px;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(6px);
-width:40px;
-height:40px;
-border-radius:50%;
-display:flex;
-justify-content:center;
-align-items:center;
-cursor:pointer;
+background:rgba(0,0,0,0.7);
+color:white;
+padding:6px 12px;
+border-radius:20px;
+font-size:13px;
+text-decoration:none;
 transition:0.3s;
+backdrop-filter:blur(5px);
 }
 
 .download-btn:hover{
 background:#00bfff;
+}
+
+/* Tombol Geser Modern */
+.nav-btn{
+background:rgba(255,255,255,0.1);
+border:none;
+color:white;
+font-size:22px;
+width:45px;
+height:45px;
+border-radius:50%;
+cursor:pointer;
+backdrop-filter:blur(6px);
+transition:0.3s;
+margin:5px;
+}
+
+.nav-btn:hover{
+background:#00bfff;
+box-shadow:0 0 15px #00bfff;
 }
 
 /* ================= OWNER ================= */
@@ -436,14 +472,14 @@ Loading...
 
 <br>
 
+<div style="display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin-top:25px;">
 <button class="btn" onclick="copyIP()">Copy IP & Port</button>
-
-<br><br>
 
 <a href="https://minecraft-mp.com/server/353699/vote/" 
 target="_blank" class="btn">
 Vote Server
 </a>
+</div>
 
 </section>
 
@@ -473,30 +509,51 @@ Vote Server
 <div class="gallery-wrapper">
 <div class="gallery-track" id="galleryTrack">
 
+<!-- FOTO 1 -->
 <div class="gallery-item">
 <img src="assets/gallery1.png" loading="lazy">
 <a href="assets/gallery1.png" download class="download-btn">
-<svg width="18" height="18" fill="white" viewBox="0 0 24 24">
-<path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 19h14"/>
-</svg>
+⬇ Download
 </a>
 </div>
 
+<!-- FOTO 2 -->
 <div class="gallery-item">
 <img src="assets/gallery2.png" loading="lazy">
 <a href="assets/gallery2.png" download class="download-btn">
-<svg width="18" height="18" fill="white" viewBox="0 0 24 24">
-<path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 19h14"/>
-</svg>
+⬇ Download
 </a>
 </div>
 
+<!-- FOTO 3 -->
 <div class="gallery-item">
 <img src="assets/gallery3.png" loading="lazy">
 <a href="assets/gallery3.png" download class="download-btn">
-<svg width="18" height="18" fill="white" viewBox="0 0 24 24">
-<path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 19h14"/>
-</svg>
+⬇ Download
+</a>
+</div>
+
+<!-- FOTO 4 -->
+<div class="gallery-item">
+<img src="assets/gallery4.png" loading="lazy">
+<a href="assets/gallery4.png" download class="download-btn">
+⬇ Download
+</a>
+</div>
+
+<!-- FOTO 5 -->
+<div class="gallery-item">
+<img src="assets/gallery5.png" loading="lazy">
+<a href="assets/gallery5.png" download class="download-btn">
+⬇ Download
+</a>
+</div>
+
+<!-- FOTO 6 -->
+<div class="gallery-item">
+<img src="assets/gallery6.png" loading="lazy">
+<a href="assets/gallery6.png" download class="download-btn">
+⬇ Download
 </a>
 </div>
 
@@ -504,14 +561,14 @@ Vote Server
 </div>
 
 <div class="gallery-controls">
-<button onclick="slideLeft()">←</button>
-<button onclick="slideRight()">→</button>
+<button class="nav-btn" onclick="slideLeft()">❮</button>
+<button class="nav-btn" onclick="slideRight()">❯</button>
 </div>
 </section>
 
 <section class="owner" id="owner">
 <h2>Owner Server</h2>
-<img src="assets/owner.jpg" class="main">
+<img src="assets/owner.png" class="main">
 <div class="social-icons">
 <a href="#"><img src="assets/icon-youtube.jpeg"></a>
 <a href="#"><img src="assets/icon-tiktok.jpeg"></a>
@@ -526,25 +583,25 @@ Vote Server
 <div class="admin-grid">
 
 <div class="admin-card">
-<img src="assets/admin1.png">
+<img src="assets/admin1.jpeg">
 <h3>LUZZYMC</h3>
 <p>Builder Server</p>
 </div>
 
 <div class="admin-card">
-<img src="assets/admin2.png">
+<img src="assets/admin2.jpeg">
 <h3>YUDASENSEI</h3>
 <p>Developer Server</p>
 </div>
 
 <div class="admin-card">
-<img src="assets/admin3.png">
+<img src="assets/admin3.jpeg">
 <h3>NAGAFLOW</h3>
 <p>Developer Server</p>
 </div>
 
 <div class="admin-card">
-<img src="assets/admin4.png">
+<img src="assets/admin4.jpeg">
 <h3>REYNARD</h3>
 <p>Builder Server</p>
 </div>
@@ -619,14 +676,20 @@ document.getElementById("parallax").style.transform="translateY("+(offset*0.5)+"
 });
 
 /* Gallery */
-let pos=0;
+let pos = 0;
+const itemWidth = 320;
+const maxScroll = -(itemWidth * 3); // 6 foto, tampil 3
+
 function slideLeft(){
-pos+=320;
-galleryTrack.style.transform="translateX("+pos+"px)";
+pos += itemWidth;
+if(pos > 0) pos = 0;
+galleryTrack.style.transform = "translateX("+pos+"px)";
 }
+
 function slideRight(){
-pos-=320;
-galleryTrack.style.transform="translateX("+pos+"px)";
+pos -= itemWidth;
+if(pos < maxScroll) pos = maxScroll;
+galleryTrack.style.transform = "translateX("+pos+"px)";
 }
 
 /* Scroll Top */
