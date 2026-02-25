@@ -151,6 +151,29 @@ font-size:20px;
 margin-top:15px;
 }
 
+/* Tombol status */
+.status-buttons{
+  margin-top:20px;
+  display:flex;
+  justify-content:center;
+  gap:15px;
+}
+
+.status-buttons .btn{
+  padding:12px 25px;
+  border-radius:30px;
+  background:linear-gradient(45deg,#00bfff,#0066ff);
+  color:white;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.3s;
+}
+
+.status-buttons .btn:hover{
+  box-shadow:0 0 20px #00bfff;
+}
+
 /* ================= FITUR FIX ================= */
 
 #fitur{
@@ -432,9 +455,13 @@ display:none;
 </div>
 </section>
 
-<section class="status" id="status">
-<h2>Server Status</h2>
-<div class="status-box" id="serverStatus">Loading...</div>
+<section id="server-overview">
+  <h2>Server Status</h2>
+  <div class="status-box" id="serverStatus">Loading...</div>
+  <div class="status-buttons">
+    <button class="btn" onclick="copyIP()">Copy IP & Port</button>
+    <a href="https://minecraft-mp.com/server/353699/vote/" target="_blank" class="btn">Vote Server</a>
+  </div>
 </section>
 
 <section id="fitur">
@@ -521,25 +548,42 @@ display:none;
 </section>
   
 <section class="owner" id="owner">
-<h2>Owner Server</h2>
-<img src="assets/owner.png" class="main">
-<div class="social-icons">
-<a href="#"><img src="assets/icon-youtube.jpeg"></a>
-<a href="#"><img src="assets/icon-tiktok.jpeg"></a>
-<a href="#"><img src="assets/icon-instagram.jpeg"></a>
-<a href="https://wa.me/6282130570915"><img src="assets/icon-whatsapp.jpeg"></a>
-<a href="#"><img src="assets/icon-discord.jpeg"></a>
-</div>
+<h2 style="margin-top:50px;">Owner Server</h2>
+  <img src="assets/owner.png" class="main-owner">
+  <div class="social-title">Follow & Ikuti Komunitas Calmionix</div>
+  <div class="social-icons">
+    <a href="#"><img src="assets/icon-tiktok.jpeg"></a>
+    <a href="#"><img src="assets/icon-youtube.jpeg"></a>
+    <a href="#"><img src="assets/icon-instagram.jpeg"></a>
+    <a href="https://wa.me/6282130570915"><img src="assets/icon-whatsapp.jpeg"></a>
+    <a href="#"><img src="assets/icon-discord.jpeg"></a>
+  </div>
 </section>
 
 <section id="admin">
-<h2>Admin List</h2>
-<div class="admin-grid">
-<img src="assets/admin1.jpeg">
-<img src="assets/admin2.jpeg">
-<img src="assets/admin3.jpeg">
-<img src="assets/admin4.jpeg">
-</div>
+<h2 style="margin-top:50px;">Admin List</h2>
+  <div class="admin-grid">
+    <div class="admin-card">
+      <img src="assets/admin1.jpeg">
+      <div class="admin-name">LUZZYMC</div>
+      <div class="admin-role">Builder</div>
+    </div>
+    <div class="admin-card">
+      <img src="assets/admin2.jpeg">
+      <div class="admin-name">YUDASENSEI</div>
+      <div class="admin-role">Developer Server</div>
+    </div>
+    <div class="admin-card">
+      <img src="assets/admin3.jpeg">
+      <div class="admin-name">NAGAFLOW</div>
+      <div class="admin-role">Developer Server</div>
+    </div>
+    <div class="admin-card">
+      <img src="assets/admin4.jpeg">
+      <div class="admin-name">REYNARD</div>
+      <div class="admin-role">Builder</div>
+    </div>
+  </div>
 </section>
 
 <section id="rank">
@@ -590,9 +634,8 @@ function closeMenu(){
 /* ================= COPY IP ================= */
 function copyIP(){
     navigator.clipboard.writeText("calmionix.fun:19139");
-    alert("IP berhasil disalin!");
+    alert("IP & Port berhasil disalin!");
 }
-
 /* ================= SERVER STATUS ================= */
 const serverStatus = document.getElementById("serverStatus");
 
