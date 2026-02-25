@@ -425,33 +425,6 @@ width:280px;
 grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
 }
 
-}
-
-/* ================= PAGE LOAD ANIMATION ================= */
-
-/* Fade Up Animation */
-.fade-up{
-opacity:0;
-transform:translateY(40px);
-transition:all 0.8s ease;
-}
-
-.fade-up.show{
-opacity:1;
-transform:translateY(0);
-}
-
-.hero-content{
-opacity:0;
-transform:scale(0.95);
-transition:all 1s ease;
-}
-
-.hero-content.show{
-opacity:1;
-transform:scale(1);
-}
-
 </style>
 </head>
 
@@ -724,26 +697,6 @@ scrollTop.style.display="block";
 }else{
 scrollTop.style.display="none";
 }
-});
-
-/* ================= PAGE LOAD EFFECT ================= */
-
-document.addEventListener("DOMContentLoaded", function(){
-
-// Hero muncul dulu
-setTimeout(() => {
-document.querySelector(".hero-content").classList.add("show");
-}, 200);
-
-// Section muncul bertahap
-const sections = document.querySelectorAll(".fade-up");
-
-sections.forEach((section, index) => {
-setTimeout(() => {
-section.classList.add("show");
-}, 400 + (index * 150));
-});
-
 });
 
 </script>
