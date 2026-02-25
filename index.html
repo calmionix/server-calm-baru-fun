@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calmionix Server</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#0a1a2f;
+color:white;
+overflow-x:hidden;
+}
+
+/* ================= HAMBURGER ================= */
+
+.menu-btn{
+position:fixed;
+top:20px;
+left:20px;
+font-size:30px;
+cursor:pointer;
+z-index:1002;
+}
+
+.sidebar{
+position:fixed;
+top:0;
+left:-280px;
+width:280px;
+height:100%;
+background:#071423;
+backdrop-filter:blur(15px);
+padding:70px 25px;
+transition:0.4s ease;
+z-index:1003;
+}
+
+.sidebar.active{ left:0; }
+
+.sidebar a{
+display:block;
+margin:18px 0;
+color:white;
+text-decoration:none;
+font-weight:600;
+transition:0.3s;
+}
+
+.sidebar a:hover{
+color:#00bfff;
+}
+
+.close-btn{
+position:absolute;
+top:20px;
+right:20px;
+font-size:22px;
+cursor:pointer;
+}
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(6px);
+opacity:0;
+visibility:hidden;
+transition:0.3s;
+z-index:1001;
+}
+
+.overlay.active{
+opacity:1;
+visibility:visible;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+position:relative;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+overflow:hidden;
+}
+
+.hero-bg{
+position:absolute;
+width:110%;
+height:110%;
+background:url('assets/hero-bg.jpg') center/cover no-repeat;
+transform:translateZ(0);
+will-change:transform;
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+}
+
+.hero-content img.logo{
+width:320px;
+margin-bottom:20px;
+}
+
+.hero-content img.ipbox{
+width:360px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.hero-content img.ipbox:hover{
+transform:scale(1.05);
+}
+
+section{
+padding:90px 8%;
+}
+
+h2{
+text-align:center;
+font-size:40px;
+margin-bottom:40px;
+font-weight:800;
+}
+
+/* ================= STATUS ================= */
+
+.status{
+background:linear-gradient(135deg,#0b1c2d,#122d4b);
+text-align:center;
+}
+
+.status-box{
+font-size:20px;
+margin-top:15px;
+}
+
+/* ================= FITUR ================= */
+
+.fitur-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+}
+
+.fitur-grid img{
+width:100%;
+border-radius:20px;
+transition:0.4s;
+}
+
+.fitur-grid img:hover{
+transform:scale(1.05);
+box-shadow:0 0 25px #00bfff;
+}
+
+/* ================= GALERI ================= */
+
+.gallery-wrapper{
+overflow:hidden;
+position:relative;
+}
+
+.gallery-track{
+display:flex;
+gap:20px;
+transition:transform 0.6s ease;
+}
+
+.gallery-track img{
+width:300px;
+border-radius:15px;
+}
+
+.gallery-item{
+position:relative;
+}
+
+.download-btn{
+position:absolute;
+bottom:10px;
+right:10px;
+background:#00bfff;
+padding:6px 10px;
+border-radius:15px;
+font-size:12px;
+cursor:pointer;
+}
+
+.gallery-controls{
+text-align:center;
+margin-top:20px;
+}
+
+.gallery-controls button{
+padding:10px 20px;
+border:none;
+border-radius:20px;
+background:#00bfff;
+color:white;
+cursor:pointer;
+margin:5px;
+}
+
+/* ================= OWNER ================= */
+
+.owner{
+background:url('assets/owner-bg.jpg') center/cover no-repeat fixed;
+text-align:center;
+}
+
+.owner img.main{
+width:260px;
+border-radius:20px;
+margin:15px;
+}
+
+.social-icons img{
+width:40px;
+margin:12px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.social-icons img:hover{
+transform:translateY(-5px);
+filter:drop-shadow(0 0 12px #00bfff);
+}
+
+/* ================= ADMIN ================= */
+
+.admin-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:25px;
+}
+
+.admin-grid img{
+width:100%;
+border-radius:20px;
+transition:0.3s;
+}
+
+.admin-grid img:hover{
+transform:translateY(-5px);
+box-shadow:0 0 20px #00bfff;
+}
+
+/* ================= RANK ================= */
+
+.rank-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+text-align:center;
+}
+
+.rank-card{
+background:#112b45;
+padding:20px;
+border-radius:20px;
+transition:0.3s;
+}
+
+.rank-card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 30px #00bfff;
+}
+
+.rank-card img{
+width:200px;
+margin-bottom:15px;
+}
+
+.btn{
+padding:12px 25px;
+border-radius:30px;
+background:linear-gradient(45deg,#00bfff,#0066ff);
+color:white;
+text-decoration:none;
+display:inline-block;
+transition:0.3s;
+}
+
+.btn:hover{
+box-shadow:0 0 20px #00bfff;
+}
+
+/* ================= RATE ================= */
+
+.rate-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+text-align:center;
+}
+
+.rate-card{
+background:#112b45;
+padding:25px;
+border-radius:20px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.rate-card:hover{
+box-shadow:0 0 30px #00bfff;
+}
+
+/* ================= FLOAT BUTTONS ================= */
+
+.floating-wa{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+padding:15px;
+border-radius:50%;
+cursor:pointer;
+z-index:999;
+}
+
+#scrollTop{
+position:fixed;
+bottom:20px;
+left:20px;
+background:#00bfff;
+padding:10px 15px;
+border-radius:50%;
+cursor:pointer;
+display:none;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:768px){
+.hero-content img.logo{ width:220px; }
+.hero-content img.ipbox{ width:260px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="menu-btn" onclick="openMenu()">☰</div>
+
+<div class="sidebar" id="sidebar">
+<div class="close-btn" onclick="closeMenu()">✖</div>
+<a href="#hero">Home</a>
+<a href="#status">Server Status</a>
+<a href="#fitur">Fitur</a>
+<a href="#galeri">Galeri</a>
+<a href="#owner">Owner</a>
+<a href="#admin">Admin</a>
+<a href="#rank">Rank</a>
+<a href="#rate">Rate Card</a>
+<a href="https://wa.me/6282130570915" target="_blank">Kontak WA</a>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<section class="hero" id="hero">
+<div class="hero-bg" id="parallax"></div>
+<div class="hero-content">
+<img src="assets/logo-calmionix.png" class="logo">
+<br>
+<img src="assets/ip-port.png" class="ipbox" onclick="copyIP()">
+</div>
+</section>
+
+<section class="status" id="status">
+<h2>Server Status</h2>
+<div class="status-box" id="serverStatus">Loading...</div>
+</section>
+
+<section id="fitur">
+<h2>Fitur Unggulan</h2>
+<div class="fitur-grid">
+<img src="assets/fitur1.jpg">
+<img src="assets/fitur2.jpg">
+</div>
+</section>
+
+<section id="galeri">
+<h2>Galeri Server</h2>
+<div class="gallery-wrapper">
+<div class="gallery-track" id="galleryTrack">
+
+<script>
+for(let i=1;i<=10;i++){
+document.write(`
+<div class="gallery-item">
+<img src="assets/gallery${i}.jpg">
+<a href="assets/gallery${i}.jpg" download class="download-btn">Download</a>
+</div>
+`)
+}
+</script>
+
+</div>
+</div>
+<div class="gallery-controls">
+<button onclick="slideLeft()">←</button>
+<button onclick="slideRight()">→</button>
+</div>
+</section>
+
+<section class="owner" id="owner">
+<h2>Owner Server</h2>
+<img src="assets/owner.jpg" class="main">
+<div class="social-icons">
+<a href="#"><img src="assets/icon-youtube.png"></a>
+<a href="#"><img src="assets/icon-tiktok.png"></a>
+<a href="#"><img src="assets/icon-instagram.png"></a>
+<a href="https://wa.me/6282130570915"><img src="assets/icon-whatsapp.png"></a>
+<a href="#"><img src="assets/icon-discord.png"></a>
+</div>
+</section>
+
+<section id="admin">
+<h2>Admin List</h2>
+<div class="admin-grid">
+<img src="assets/admin1.jpg">
+<img src="assets/admin2.jpg">
+<img src="assets/admin3.jpg">
+<img src="assets/admin4.jpg">
+</div>
+</section>
+
+<section id="rank">
+<h2>Rank Server</h2>
+<div class="rank-grid">
+<div class="rank-card">
+<img src="assets/rank-vip.png">
+<a href="https://wa.me/6282130570915?text=Halo%20saya%20mau%20beli%20rank%20VIP" target="_blank" class="btn">Buy</a>
+</div>
+<div class="rank-card">
+<img src="assets/rank-vipplus.png">
+<a href="https://wa.me/6282130570915?text=Halo%20saya%20mau%20beli%20rank%20VIP+" target="_blank" class="btn">Buy</a>
+</div>
+<div class="rank-card">
+<img src="assets/rank-mvp.png">
+<a href="https://wa.me/6282130570915?text=Halo%20saya%20mau%20beli%20rank%20MVP" target="_blank" class="btn">Buy</a>
+</div>
+</div>
+</section>
+
+<section id="rate">
+<h2>Rate Card</h2>
+<div class="rate-grid">
+<div class="rate-card" onclick="waRate('TikTok')">TikTok Promotion</div>
+<div class="rate-card" onclick="waRate('YouTube')">YouTube Promotion</div>
+<div class="rate-card" onclick="waRate('Konten Only')">Konten Only</div>
+<div class="rate-card" onclick="waRate('Saluran WA')">Saluran WA</div>
+</div>
+</section>
+
+<div class="floating-wa" onclick="window.open('https://wa.me/6282130570915')">WA</div>
+<div id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<script>
+function openMenu(){
+sidebar.classList.add("active");
+overlay.classList.add("active");
+}
+function closeMenu(){
+sidebar.classList.remove("active");
+overlay.classList.remove("active");
+}
+
+function copyIP(){
+navigator.clipboard.writeText("calmionix.fun:19139");
+alert("IP berhasil disalin!");
+}
+
+fetch("https://api.mcsrvstat.us/3/play.calmionix.my.id:19139")
+.then(res=>res.json())
+.then(data=>{
+if(data.online){
+serverStatus.innerHTML="🟢 Online<br>"+data.players.online+" / "+data.players.max+" Player";
+}else{
+serverStatus.innerHTML="🔴 Offline";
+}
+});
+
+function waRate(type){
+window.open("https://wa.me/6282130570915?text=Halo%20saya%20mau%20endorse%20"+type);
+}
+
+/* Dramatic Parallax */
+window.addEventListener("scroll",()=>{
+let offset=window.pageYOffset;
+document.getElementById("parallax").style.transform="translateY("+(offset*0.5)+"px)";
+});
+
+/* Gallery */
+let pos=0;
+function slideLeft(){
+pos+=320;
+galleryTrack.style.transform="translateX("+pos+"px)";
+}
+function slideRight(){
+pos-=320;
+galleryTrack.style.transform="translateX("+pos+"px)";
+}
+
+/* Scroll Top */
+window.addEventListener("scroll",()=>{
+if(window.scrollY>400){
+scrollTop.style.display="block";
+}else{
+scrollTop.style.display="none";
+}
+});
+</script>
+
+</body>
+</html>
