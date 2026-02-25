@@ -574,57 +574,70 @@ display:none;
 <div id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
 
 <script>
+/* ================= MENU SIDEBAR ================= */
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
+
 function openMenu(){
-sidebar.classList.add("active");
-overlay.classList.add("active");
+    sidebar.classList.add("active");
+    overlay.classList.add("active");
 }
 function closeMenu(){
-sidebar.classList.remove("active");
-overlay.classList.remove("active");
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
 }
 
+/* ================= COPY IP ================= */
 function copyIP(){
-navigator.clipboard.writeText("calmionix.fun:19139");
-alert("IP berhasil disalin!");
+    navigator.clipboard.writeText("calmionix.fun:19139");
+    alert("IP berhasil disalin!");
 }
+
+/* ================= SERVER STATUS ================= */
+const serverStatus = document.getElementById("serverStatus");
 
 fetch("https://api.mcsrvstat.us/3/play.calmionix.my.id:19139")
-.then(res=>res.json())
-.then(data=>{
-if(data.online){
-serverStatus.innerHTML="🟢 Online<br>"+data.players.online+" / "+data.players.max+" Player";
-}else{
-serverStatus.innerHTML="🔴 Offline";
-}
+.then(res => res.json())
+.then(data => {
+    if(data.online){
+        serverStatus.innerHTML = "🟢 Online<br>" + data.players.online + " / " + data.players.max + " Player";
+    } else {
+        serverStatus.innerHTML = "🔴 Offline";
+    }
+})
+.catch(err => {
+    serverStatus.innerHTML = "🔴 Offline";
+    console.error(err);
 });
 
+/* ================= RATE CARD ================= */
 function waRate(type){
-window.open("https://wa.me/6282130570915?text=Halo%20saya%20mau%20endorse%20"+type);
+    window.open("https://wa.me/6282130570915?text=Halo%20saya%20mau%20endorse%20"+type);
 }
 
-/* Dramatic Parallax */
-window.addEventListener("scroll",()=>{
-let offset=window.pageYOffset;
-document.getElementById("parallax").style.transform="translateY("+(offset*0.5)+"px)";
+/* ================= PARALLAX HERO ================= */
+window.addEventListener("scroll", () => {
+    let offset = window.pageYOffset;
+    document.getElementById("parallax").style.transform = "translateY(" + (offset * 0.5) + "px)";
 });
 
-/* Gallery */
+/* ================= GALLERY SLIDE ================= */
+const galleryTrack = document.getElementById("galleryTrack");
 let pos = 0;
 const itemWidth = 320;
 const maxScroll = -(itemWidth * 3); // 6 foto, tampil 3
 
 function slideLeft(){
-pos += itemWidth;
-if(pos > 0) pos = 0;
-galleryTrack.style.transform = "translateX("+pos+"px)";
+    pos += itemWidth;
+    if(pos > 0) pos = 0;
+    galleryTrack.style.transform = "translateX(" + pos + "px)";
 }
 
 function slideRight(){
-pos -= itemWidth;
-if(pos < maxScroll) pos = maxScroll;
-galleryTrack.style.transform = "translateX("+pos+"px)";
+    pos -= itemWidth;
+    if(pos < maxScroll) pos = maxScroll;
+    galleryTrack.style.transform = "translateX(" + pos + "px)";
 }
-});
 </script>
 
 </body>
