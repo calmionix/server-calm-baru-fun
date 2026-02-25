@@ -429,20 +429,11 @@ grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
 
 /* ================= PAGE LOAD ANIMATION ================= */
 
-body{
-opacity:0;
-transition:opacity 0.8s ease;
-}
-
-body.loaded{
-opacity:1;
-}
-
 /* Fade Up Animation */
 .fade-up{
 opacity:0;
 transform:translateY(40px);
-transition:all 0.9s cubic-bezier(.17,.67,.83,.67);
+transition:all 0.8s ease;
 }
 
 .fade-up.show{
@@ -450,7 +441,6 @@ opacity:1;
 transform:translateY(0);
 }
 
-/* Hero Animation */
 .hero-content{
 opacity:0;
 transform:scale(0.95);
@@ -739,10 +729,9 @@ scrollTop.style.display="none";
 
 /* ================= PAGE LOAD EFFECT ================= */
 
-window.addEventListener("load", () => {
-document.body.classList.add("loaded");
+document.addEventListener("DOMContentLoaded", function(){
 
-// Hero muncul duluan
+// Hero muncul dulu
 setTimeout(() => {
 document.querySelector(".hero-content").classList.add("show");
 }, 200);
@@ -755,7 +744,7 @@ setTimeout(() => {
 section.classList.add("show");
 }, 400 + (index * 150));
 });
-});
 
+});
 </body>
 </html>
