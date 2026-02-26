@@ -114,12 +114,12 @@ z-index:2;
 }
 
 .hero-content img.logo{
-width:320px;
-margin-bottom:20px;
+width:500px;
+margin-bottom:25px;
 }
 
 .hero-content img.ipbox{
-width:360px;
+width:460px;
 cursor:pointer;
 transition:0.3s;
 }
@@ -418,6 +418,60 @@ cursor:pointer;
 display:none;
 }
 
+/* ================= HERO TOP MENU ================= */
+
+.hero-top-menu{
+position:absolute;
+top:25px;
+right:50px;
+z-index:1002;
+display:flex;
+gap:15px;
+}
+
+.hero-top-menu a{
+padding:10px 22px;
+border-radius:30px;
+background:rgba(255,255,255,0.12);
+backdrop-filter:blur(10px);
+color:white;
+text-decoration:none;
+font-weight:600;
+font-size:14px;
+transition:0.3s;
+}
+
+.hero-top-menu a:hover{
+background:linear-gradient(45deg,#00bfff,#0066ff);
+box-shadow:0 0 15px #00bfff;
+}
+
+/* ================= HERO OPTIONS ================= */
+
+.hero-options{
+margin-top:25px;
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.hero-btn{
+padding:14px 32px;
+border-radius:30px;
+background:linear-gradient(45deg,#00bfff,#0066ff);
+color:white;
+text-decoration:none;
+font-weight:700;
+letter-spacing:1px;
+transition:0.3s;
+}
+
+.hero-btn:hover{
+box-shadow:0 0 20px #00bfff;
+transform:translateY(-3px);
+}
+
 /* ================= RESPONSIVE ================= */
 
 @media(max-width:768px){
@@ -448,10 +502,21 @@ display:none;
 
 <section class="hero" id="hero">
 <div class="hero-bg" id="parallax"></div>
+
+<!-- MENU KANAN ATAS -->
+<div class="hero-top-menu">
+  <a href="#rank">BELI RANK</a>
+  <a href="https://minecraft-mp.com/server/353699/vote/" target="_blank">VOTE SERVER</a>
+  <a href="#rate">ENDORSE</a>
+</div>
+
 <div class="hero-content">
 <img src="assets/logo-calmionix.png" class="logo">
 <br>
 <img src="assets/ip-port.png" class="ipbox" onclick="copyIP()">
+<div class="hero-options">
+  <a href="https://minecraft-mp.com/server/353699/" target="_blank" class="hero-btn">SERVER LIST</a>
+  <a href="#rate" class="hero-btn">ENDORSE</a>
 </div>
 </section>
 
