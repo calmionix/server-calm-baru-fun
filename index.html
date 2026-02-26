@@ -174,22 +174,27 @@ margin-top:15px;
   box-shadow:0 0 20px #00bfff;
 }
 
-/* ================= FITUR FIX ================= */
+/* ================= FITUR ================= */
 
 #fitur{
 max-width:1100px;
 margin:auto;
 }
 
-.fitur-grid{
+..fitur-grid{
 display:flex;
 justify-content:center;
+align-items:stretch;
 gap:30px;
-flex-wrap:wrap;
+flex-wrap:nowrap; /* penting biar gak turun */
+overflow-x:auto; /* kalau layar kecil bisa geser */
+padding-bottom:10px;
 }
 
 .fitur-card{
-width:300px;
+min-width:280px;
+max-width:280px;
+flex-shrink:0; /* biar gak mengecil */
 background:#112b45;
 padding:20px;
 border-radius:25px;
@@ -351,29 +356,28 @@ transform:translateY(-5px) scale(1.1);
 .admin-grid{
 display:flex;
 justify-content:center;
-gap:30px;
-flex-wrap:wrap;
+align-items:flex-start;
+gap:40px;
+flex-wrap:nowrap; /* biar 1 baris */
+overflow-x:auto;
+padding-bottom:10px;
 }
 
 .admin-card{
+min-width:170px;
+max-width:170px;
 text-align:center;
-width:180px;
+flex-shrink:0;
 }
 
 .admin-card img{
 width:100%;
 border-radius:20px;
-transition:0.3s;
-}
-
-.admin-card img:hover{
-transform:translateY(-8px);
-box-shadow:0 0 20px #00bfff;
 }
 
 .admin-name{
 font-weight:800;
-font-size:18px;
+font-size:20px;
 margin-top:10px;
 }
 
@@ -472,28 +476,50 @@ box-shadow:0 0 20px rgba(90,90,255,0.6);
 
 /* ================= RATE ================= */
 
-.rate-card.premium{
-background:white;
-color:#222;
-border-radius:25px;
-padding:30px;
+.rate-grid{
 display:flex;
-flex-direction:column;
-justify-content:space-between;
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
+justify-content:center;
+gap:40px; /* jarak antar TikTok, YouTube, dll */
+flex-wrap:wrap;
+margin-top:40px;
+}
+
+.rate-card{
+width:280px; /* jangan lebar */
+background:#0f1f33;
+border-radius:25px;
+padding:25px;
+text-align:center;
 transition:0.4s;
 }
 
-.rate-card.premium:hover{
-transform:translateY(-10px);
-box-shadow:0 20px 40px rgba(0,0,0,0.3);
+.rate-card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 25px #00bfff;
 }
 
-.rate-list{
-margin:20px 0;
-display:flex;
-flex-direction:column;
-gap:8px;
+.rate-card h3{
+margin-bottom:15px;
+font-size:22px;
+}
+
+.rate-card p{
+margin:8px 0;
+}
+
+.rate-card button{
+margin-top:15px;
+padding:10px 25px;
+border:none;
+border-radius:20px;
+background:#00bfff;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+.rate-card button:hover{
+background:#0099cc;
 }
 
 /* ================= FLOAT BUTTONS ================= */
@@ -839,12 +865,11 @@ Follow & Ikuti Komunitas Calmionix
       <div class="admin-name">REYNARD</div>
       <div class="admin-role">Builder Server</div>
     </div>
-  </div>
-<div class="admin-card">
-  <img src="assets/admin6.jpeg">
-  <div class="admin-name">ANANLOH</div>
-  <div class="admin-role">Builder Server</div>
-</div>
+    <div class="admin-card">
+      <img src="assets/admin6.jpeg">
+      <div class="admin-name">ANANLOH</div>
+      <div class="admin-role">Builder Server</div>
+    </div>
 </section>
 
 <section id="rank" class="rank-section">
