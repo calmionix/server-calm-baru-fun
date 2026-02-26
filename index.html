@@ -177,54 +177,40 @@ margin-top:15px;
 /* ================= FITUR ================= */
 
 #fitur{
-max-width:1100px;
-margin:auto;
+text-align:center;
+padding:80px 20px;
 }
 
-..fitur-grid{
+.fitur-grid{
 display:flex;
 justify-content:center;
 align-items:stretch;
 gap:30px;
-flex-wrap:nowrap; /* penting biar gak turun */
-overflow-x:auto; /* kalau layar kecil bisa geser */
-padding-bottom:10px;
+flex-wrap:nowrap; /* INI PENTING */
+max-width:1100px;
+margin:0 auto;
 }
 
 .fitur-card{
-min-width:280px;
-max-width:280px;
-flex-shrink:0; /* biar gak mengecil */
-background:#112b45;
-padding:20px;
+width:300px; /* Jangan lebih dari 330 */
+background:#0f1f33;
 border-radius:25px;
+padding:25px;
 text-align:center;
 transition:0.4s;
 }
 
-.fitur-card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 25px #00bfff;
-}
-
 .fitur-card img{
 width:100%;
-aspect-ratio:16/9;
-object-fit:cover;
-border-radius:16px;
+border-radius:20px;
 margin-bottom:15px;
 }
 
-.fitur-card p{
-font-size:14px;
-opacity:0.85;
-display:-webkit-box;
--webkit-line-clamp:2;
--webkit-box-orient:vertical;
-overflow:hidden;
-min-height:40px;
+.fitur-card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 25px #00bfff;
 }
-
+  
 /* ================= GALERI FIX ================= */
 
 .gallery-wrapper{
@@ -386,6 +372,22 @@ font-size:14px;
 opacity:0.7;
 }
 
+.admin-card img{
+width:170px;
+border-radius:25px;
+transition:0.3s;
+cursor:pointer;
+}
+
+.admin-card img:active{
+transform:scale(0.9);
+box-shadow:0 0 25px #00bfff;
+}
+
+.admin-card img:hover{
+transform:scale(1.05);
+}
+
 /* ================= RANK ================= */
 
 .rank-section{
@@ -477,41 +479,49 @@ box-shadow:0 0 20px rgba(90,90,255,0.6);
 /* ================= RATE ================= */
 
 .rate-grid{
-display:flex;
-justify-content:center;
-gap:40px; /* jarak antar TikTok, YouTube, dll */
-flex-wrap:wrap;
-margin-top:40px;
+display:grid;
+grid-template-columns:repeat(2, 1fr);
+gap:40px;
+max-width:900px;
+margin:60px auto;
 }
 
 .rate-card{
-width:280px; /* jangan lebar */
 background:#0f1f33;
-border-radius:25px;
-padding:25px;
+border-radius:30px;
+padding:30px;
 text-align:center;
 transition:0.4s;
 }
 
 .rate-card:hover{
-transform:translateY(-8px);
-box-shadow:0 0 25px #00bfff;
+transform:translateY(-10px);
+box-shadow:0 0 30px #00bfff;
 }
 
 .rate-card h3{
-margin-bottom:15px;
-font-size:22px;
+font-size:24px;
+margin-bottom:20px;
 }
 
-.rate-card p{
+.opsi-box{
+background:#132c47;
+padding:10px;
+border-radius:15px;
 margin:8px 0;
+transition:0.3s;
+cursor:pointer;
+}
+
+.opsi-box:hover{
+background:#1a3a5f;
 }
 
 .rate-card button{
 margin-top:15px;
-padding:10px 25px;
+padding:12px 30px;
 border:none;
-border-radius:20px;
+border-radius:25px;
 background:#00bfff;
 color:white;
 cursor:pointer;
@@ -733,27 +743,22 @@ animation:fadeUp 1s ease;
 
 <section id="fitur">
 <h2>Fitur Unggulan</h2>
-
 <div class="fitur-grid">
-
 <div class="fitur-card">
 <img src="assets/fitur-1.png" loading="lazy">
 <h3>HEWAN PELIHARAAN</h3>
 <p>Gunakan command /pets untuk summon pet keren dan temani petualanganmu.</p>
 </div>
-
 <div class="fitur-card">
 <img src="assets/fitur-2.png" loading="lazy">
 <h3>DUNGEON SLIME</h3>
 <p>Masuk dungeon via /warps dan lawan slime kuat dengan reward menarik.</p>
 </div>
-
 <div class="fitur-card">
 <img src="assets/fitur-3.png" loading="lazy">
 <h3>CUSTOM WORLD</h3>
 <p>World survival dengan custom biome unik, terrain berbeda dari vanilla dan pengalaman eksplorasi lebih seru.</p>
 </div>
-
 </div>
 </section>
 
