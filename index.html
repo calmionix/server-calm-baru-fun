@@ -302,16 +302,48 @@ border-radius:20px;
 margin:15px;
 }
 
-.social-icons img{
-width:40px;
-margin:12px;
+.owner-title{
+font-size:42px;
+font-weight:800;
+text-shadow:0 0 15px #00bfff, 0 0 30px #00bfff;
+margin-top:50px;
+animation:fadeUp 1s ease;
+}
+
+.main-owner{
+width:260px;
+border-radius:40px;
+transition:0.4s;
 cursor:pointer;
+}
+
+.main-owner:hover{
+transform:scale(1.08) rotate(2deg);
+box-shadow:0 0 30px #00bfff;
+}
+
+.social-title{
+margin-top:20px;
+font-size:18px;
+font-weight:600;
+background:rgba(0,0,0,0.5);
+display:inline-block;
+padding:10px 20px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+}
+
+.social-icons img{
+width:45px;
+padding:10px;
+background:rgba(255,255,255,0.1);
+border-radius:15px;
 transition:0.3s;
 }
 
 .social-icons img:hover{
-transform:translateY(-5px);
-filter:drop-shadow(0 0 12px #00bfff);
+background:#00bfff;
+transform:translateY(-5px) scale(1.1);
 }
 
 /* ================= ADMIN ================= */
@@ -331,6 +363,21 @@ transition:0.3s;
 .admin-grid img:hover{
 transform:translateY(-5px);
 box-shadow:0 0 20px #00bfff;
+}
+
+.admin-card{
+text-align:center;
+}
+
+.admin-name{
+font-weight:800;
+font-size:18px;
+margin-top:10px;
+}
+
+.admin-role{
+font-size:14px;
+opacity:0.7;
 }
 
 /* ================= RANK ================= */
@@ -423,23 +470,28 @@ box-shadow:0 0 20px rgba(90,90,255,0.6);
 
 /* ================= RATE ================= */
 
-.rate-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
-text-align:center;
+.rate-card.premium{
+background:white;
+color:#222;
+border-radius:25px;
+padding:30px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+transition:0.4s;
 }
 
-.rate-card{
-background:#112b45;
-padding:25px;
-border-radius:20px;
-cursor:pointer;
-transition:0.3s;
+.rate-card.premium:hover{
+transform:translateY(-10px);
+box-shadow:0 20px 40px rgba(0,0,0,0.3);
 }
 
-.rate-card:hover{
-box-shadow:0 0 30px #00bfff;
+.rate-list{
+margin:20px 0;
+display:flex;
+flex-direction:column;
+gap:8px;
 }
 
 /* ================= FLOAT BUTTONS ================= */
@@ -584,6 +636,22 @@ background:#4a49c6;
 .hero-content img.logo{ width:220px; }
 .hero-content img.ipbox{ width:260px; }
 }
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(40px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+section{
+animation:fadeUp 1s ease;
+}
+
 </style>
 </head>
 
@@ -650,6 +718,12 @@ background:#4a49c6;
 <img src="assets/fitur-2.png" loading="lazy">
 <h3>DUNGEON SLIME</h3>
 <p>Masuk dungeon via /warps dan lawan slime kuat dengan reward menarik.</p>
+</div>
+
+<div class="fitur-card">
+<img src="assets/fitur-3.png" loading="lazy">
+<h3>CUSTOM WORLD</h3>
+<p>World survival dengan custom biome unik, terrain berbeda dari vanilla dan pengalaman eksplorasi lebih seru.</p>
 </div>
 
 </div>
@@ -719,7 +793,7 @@ background:#4a49c6;
 </section>
   
 <section class="owner" id="owner">
-<h2 style="margin-top:50px;">Owner Server</h2>
+<h2 class="owner-title">THE FOUNDER OF CALMIONIX</h2>
   <img src="assets/owner.png" class="main-owner">
   <div class="social-title">Follow & Ikuti Komunitas Calmionix</div>
   <div class="social-icons">
@@ -737,7 +811,7 @@ background:#4a49c6;
     <div class="admin-card">
       <img src="assets/admin1.jpeg">
       <div class="admin-name">LUZZYMC</div>
-      <div class="admin-role">Builder</div>
+      <div class="admin-role">Builder Server</div>
     </div>
     <div class="admin-card">
       <img src="assets/admin5.jpeg">
@@ -752,9 +826,14 @@ background:#4a49c6;
     <div class="admin-card">
       <img src="assets/admin4.jpeg">
       <div class="admin-name">REYNARD</div>
-      <div class="admin-role">Builder</div>
+      <div class="admin-role">Builder Server</div>
     </div>
   </div>
+<div class="admin-card">
+  <img src="assets/admin6.jpeg">
+  <div class="admin-name">ANANLOH</div>
+  <div class="admin-role">Builder Server</div>
+</div>
 </section>
 
 <section id="rank" class="rank-section">
@@ -822,34 +901,41 @@ background:#4a49c6;
 
 <div class="rate-grid">
 
-<div class="rate-card">
+<div class="rate-card premium">
 <h3>TIKTOK</h3>
-<p>45K - Tanpa Revisi</p>
-<p>60K - 1x Revisi Ringan</p>
-<p>80K - 2x Revisi</p>
-<button onclick="waRate('TikTok')" class="buy-btn">Hub. Admin</button>
+<div class="rate-list">
+<div>45K - Tanpa Revisi</div>
+<div>60K - 1x Revisi Ringan</div>
+<div>80K - 2x Revisi</div>
+</div>
+<button onclick="waRate('TikTok')" class="buy-btn">Pesan</button>
 </div>
 
-<div class="rate-card">
+<div class="rate-card premium">
 <h3>YOUTUBE SHORT</h3>
-<p>30K - 1x Revisi</p>
-<button onclick="waRate('YouTube Short')" class="buy-btn">Hub. Admin</button>
+<div class="rate-list">
+<div>30K - 1x Revisi</div>
+</div>
+<button onclick="waRate('YouTube Short')" class="buy-btn">Pesan</button>
 </div>
 
-<div class="rate-card">
+<div class="rate-card premium">
 <h3>KONTEN ONLY</h3>
-<p>40K - Tanpa Revisi</p>
-<p>55K - 1x Revisi</p>
-<button onclick="waRate('Konten Only')" class="buy-btn">Hub. Admin</button>
+<div class="rate-list">
+<div>40K - Tanpa Revisi</div>
+<div>55K - 1x Revisi</div>
+</div>
+<button onclick="waRate('Konten Only')" class="buy-btn">Pesan</button>
 </div>
 
-<div class="rate-card">
+<div class="rate-card premium">
 <h3>SALURAN WA</h3>
-<p>25K - 2x Upload</p>
-<p>15K - 1x Upload</p>
-<button onclick="waRate('Saluran WA')" class="buy-btn">Hub. Admin</button>
+<div class="rate-list">
+<div>25K - 2x Upload</div>
+<div>15K - 1x Upload</div>
 </div>
-
+<button onclick="waRate('Saluran WA')" class="buy-btn">Pesan</button>
+</div>
 </div>
 </section>
 
@@ -919,17 +1005,23 @@ window.addEventListener("scroll", () => {
 const galleryTrack = document.getElementById("galleryTrack");
 let pos = 0;
 const itemWidth = 320;
-const maxScroll = -(itemWidth * 3); // 6 foto, tampil 3
+const totalItems = galleryTrack.children.length;
+const visibleItems = 3;
+const maxScroll = -(itemWidth * (totalItems - visibleItems));
 
 function slideLeft(){
     pos += itemWidth;
-    if(pos > 0) pos = 0;
+    if(pos > 0){
+        pos = maxScroll; // lompat ke akhir
+    }
     galleryTrack.style.transform = "translateX(" + pos + "px)";
 }
 
 function slideRight(){
     pos -= itemWidth;
-    if(pos < maxScroll) pos = maxScroll;
+    if(pos < maxScroll){
+        pos = 0; // balik ke awal
+    }
     galleryTrack.style.transform = "translateX(" + pos + "px)";
 }
 
