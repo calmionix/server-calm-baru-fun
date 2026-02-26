@@ -114,7 +114,7 @@ z-index:2;
 }
 
 .hero-content img.logo{
-width:650px;
+width:850px;
 margin-bottom:25px;
 }
 
@@ -520,6 +520,64 @@ box-shadow:0 0 20px #00bfff;
 transform:translateY(-3px);
 }
 
+/* ================= POPUP RANK ================= */
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.popup-box{
+background:white;
+color:#222;
+padding:30px;
+border-radius:20px;
+width:320px;
+text-align:center;
+animation:popupAnim 0.3s ease;
+}
+
+@keyframes popupAnim{
+from{transform:scale(0.8);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+.popup-option{
+background:#f2f2f2;
+padding:10px;
+margin:10px 0;
+border-radius:10px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.popup-option:hover{
+background:#5b5ce2;
+color:white;
+}
+
+.popup-buy{
+margin-top:15px;
+padding:10px 25px;
+border:none;
+border-radius:25px;
+background:#5b5ce2;
+color:white;
+cursor:pointer;
+}
+
+.popup-buy:hover{
+background:#4a49c6;
+}
+
 /* ================= RESPONSIVE ================= */
 
 @media(max-width:768px){
@@ -874,6 +932,63 @@ function slideRight(){
     if(pos < maxScroll) pos = maxScroll;
     galleryTrack.style.transform = "translateX(" + pos + "px)";
 }
+
+/* ================= RANK POPUP ================= */
+
+const popup = document.getElementById("rankPopup");
+const popupTitle = document.getElementById("popupTitle");
+const monthlyText = document.getElementById("monthlyText");
+const permanentText = document.getElementById("permanentText");
+
+let selectedRank = "";
+let selectedPackage = "";
+
+function openPopup(rank){
+    selectedRank = rank;
+
+    if(rank === "VIP"){
+        popupTitle.innerText = "Beli Rank VIP";
+        monthlyText.innerText = "Bulanan - 10k";
+        permanentText.innerText = "Permanent - 30k";
+    }
+
+    if(rank === "VIP+"){
+        popupTitle.innerText = "Beli Rank VIP+";
+        monthlyText.innerText = "Bulanan - 30k";
+        permanentText.innerText = "Permanent - 50k";
+    }
+
+    if(rank === "MVP"){
+        popupTitle.innerText = "Beli Rank MVP";
+        monthlyText.innerText = "Bulanan - 50k";
+        permanentText.innerText = "Permanent - 80k";
+    }
+
+    popup.style.display = "flex";
+}
+
+function selectPackage(type){
+    selectedPackage = type;
+}
+
+function confirmBuy(){
+    if(!selectedPackage){
+        alert("Pilih paket dulu!");
+        return;
+    }
+
+    let paket = selectedPackage === "monthly" ? "Bulanan" : "Permanent";
+
+    window.open("https://wa.me/6282130570915?text=Halo%20Admin,%20saya%20ingin%20membeli%20Rank%20"+selectedRank+"%20("+paket+")");
+}
+
+/* klik luar popup untuk close */
+window.onclick = function(e){
+    if(e.target === popup){
+        popup.style.display = "none";
+    }
+}
+
 </script>
 
 </body>
