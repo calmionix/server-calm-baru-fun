@@ -335,42 +335,100 @@ box-shadow:0 0 20px #00bfff;
 
 /* ================= RANK ================= */
 
-.rank-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
+.rank-section{
+background:linear-gradient(135deg,#5b5ce2,#4a49c6);
+padding:80px 8%;
 text-align:center;
 }
 
+.rank-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+}
+
 .rank-card{
-background:#112b45;
+background:white;
+border-radius:25px;
 padding:20px;
-border-radius:20px;
-transition:0.3s;
+color:#222;
+text-align:center;
 }
 
-.rank-card:hover{
-transform:translateY(-5px);
-box-shadow:0 0 30px #00bfff;
+.rank-img{
+width:180px;
+margin-bottom:10px;
 }
 
-.rank-card img{
-width:200px;
-margin-bottom:15px;
+.rank-box{
+background:#f4f4f4;
+padding:15px;
+border-radius:15px;
 }
 
-.btn{
-padding:12px 25px;
-border-radius:30px;
-background:linear-gradient(45deg,#00bfff,#0066ff);
+.rank-box ul{
+list-style:none;
+padding:0;
+font-size:14px;
+margin:15px 0;
+}
+
+.buy-btn{
+padding:10px 25px;
+border:none;
+border-radius:25px;
+background:#5b5ce2;
 color:white;
-text-decoration:none;
-display:inline-block;
-transition:0.3s;
+cursor:pointer;
+font-weight:600;
 }
 
-.btn:hover{
-box-shadow:0 0 20px #00bfff;
+.buy-btn:hover{
+background:#3c3cb3;
+}
+
+/* POPUP */
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:2000;
+}
+
+.popup-box{
+background:white;
+color:#222;
+padding:30px;
+border-radius:20px;
+width:330px;
+text-align:center;
+}
+
+.popup-box hr{
+margin:10px 0;
+}
+
+.popup-option{
+margin:8px 0;
+cursor:pointer;
+font-weight:600;
+}
+
+.popup-buy{
+margin-top:15px;
+padding:10px 20px;
+border:none;
+border-radius:20px;
+background:#5b5ce2;
+color:white;
+cursor:pointer;
 }
 
 /* ================= RATE ================= */
@@ -651,33 +709,110 @@ transform:translateY(-3px);
   </div>
 </section>
 
-<section id="rank">
-<h2>Rank Server</h2>
+<section id="rank" class="rank-section">
+<h2>RANK SERVER</h2>
+
 <div class="rank-grid">
+
+<!-- VIP -->
 <div class="rank-card">
-<img src="assets/rank-vip.png">
-<a href="https://wa.me/6282130570915?text=Halo%20saya%20mau%20beli%20rank%20VIP" target="_blank" class="btn">Buy</a>
+<img src="assets/rank-vip.png" class="rank-img">
+<div class="rank-box">
+<h4>BENEFIT</h4>
+<ul>
+<li>/kits vip</li>
+<li>/fly</li>
+<li>/feed</li>
+<li>/enderchest</li>
+<li>Unlock 20% Pets</li>
+<li>Prefix VIP</li>
+</ul>
+<button onclick="openPopup('VIP')" class="buy-btn">BUY</button>
 </div>
+</div>
+
+<!-- VIP+ -->
 <div class="rank-card">
-<img src="assets/rank-vipplus.png">
-<a href="https://wa.me/6282130570915?text=Halo%20saya%20mau%20beli%20rank%20VIP+" target="_blank" class="btn">Buy</a>
+<img src="assets/rank-vipplus.png" class="rank-img">
+<div class="rank-box">
+<h4>BENEFIT</h4>
+<ul>
+<li>Semua Fitur VIP</li>
+<li>/kits vip+</li>
+<li>/repair</li>
+<li>Unlock 50% Pets</li>
+<li>Prefix VIP+</li>
+</ul>
+<button onclick="openPopup('VIP+')" class="buy-btn">BUY</button>
 </div>
+</div>
+
+<!-- MVP -->
 <div class="rank-card">
-<img src="assets/rank-mvp.png">
-<a href="https://wa.me/6282130570915?text=Halo%20saya%20mau%20beli%20rank%20MVP" target="_blank" class="btn">Buy</a>
+<img src="assets/rank-mvp.png" class="rank-img">
+<div class="rank-box">
+<h4>BENEFIT</h4>
+<ul>
+<li>Semua fitur VIP & VIP+</li>
+<li>/kits mvp</li>
+<li>/heal</li>
+<li>Unlock All Pets</li>
+<li>Prefix MVP</li>
+</ul>
+<button onclick="openPopup('MVP')" class="buy-btn">BUY</button>
 </div>
+</div>
+
 </div>
 </section>
 
-<section id="rate">
-<h2>Rate Card</h2>
+<section id="rate" class="rate-section">
+<h2>RATE CARD</h2>
+
 <div class="rate-grid">
-<div class="rate-card" onclick="waRate('TikTok')">TikTok Promotion</div>
-<div class="rate-card" onclick="waRate('YouTube')">YouTube Promotion</div>
-<div class="rate-card" onclick="waRate('Konten Only')">Konten Only</div>
-<div class="rate-card" onclick="waRate('Saluran WA')">Saluran WA</div>
+
+<div class="rate-card">
+<h3>TIKTOK</h3>
+<p>45K - Tanpa Revisi</p>
+<p>60K - 1x Revisi Ringan</p>
+<p>80K - 2x Revisi</p>
+<button onclick="waRate('TikTok')" class="buy-btn">Hub. Admin</button>
+</div>
+
+<div class="rate-card">
+<h3>YOUTUBE SHORT</h3>
+<p>30K - 1x Revisi</p>
+<button onclick="waRate('YouTube Short')" class="buy-btn">Hub. Admin</button>
+</div>
+
+<div class="rate-card">
+<h3>KONTEN ONLY</h3>
+<p>40K - Tanpa Revisi</p>
+<p>55K - 1x Revisi</p>
+<button onclick="waRate('Konten Only')" class="buy-btn">Hub. Admin</button>
+</div>
+
+<div class="rate-card">
+<h3>SALURAN WA</h3>
+<p>25K - 2x Upload</p>
+<p>15K - 1x Upload</p>
+<button onclick="waRate('Saluran WA')" class="buy-btn">Hub. Admin</button>
+</div>
+
 </div>
 </section>
+
+<div class="popup" id="rankPopup">
+<div class="popup-box">
+<h3 id="popupTitle">Beli Rank</h3>
+<hr>
+<div class="popup-option" onclick="selectPackage('monthly')" id="monthlyText"></div>
+<div class="popup-option" onclick="selectPackage('permanent')" id="permanentText"></div>
+<hr>
+<p>Permanent Hingga Ganti Season</p>
+<button class="popup-buy" onclick="confirmBuy()">Buy</button>
+</div>
+</div>
 
 <div class="floating-wa" onclick="window.open('https://wa.me/6282130570915')">WA</div>
 <div id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
