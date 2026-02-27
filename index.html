@@ -758,6 +758,66 @@ cursor:pointer;
 background:#4a49c6;
 }
 
+.status-section{
+  background:#0b1c2d;
+  padding:80px 20px;
+  text-align:center;
+}
+
+.status-container{
+  max-width:700px;
+  margin:auto;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(15px);
+  padding:30px;
+  border-radius:25px;
+  box-shadow:0 0 40px rgba(0,191,255,0.2);
+}
+
+.status-row{
+  display:flex;
+  justify-content:space-between;
+  text-align:left;
+  font-size:18px;
+}
+
+.status-info{
+  display:flex;
+  justify-content:space-between;
+  font-size:18px;
+  margin:15px 0;
+}
+
+.status-container hr{
+  border:none;
+  height:1px;
+  background:rgba(255,255,255,0.2);
+  margin:20px 0;
+}
+
+.status-buttons{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.status-buttons button{
+  flex:1;
+  padding:12px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(45deg,#00bfff,#0066ff);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.status-buttons button:hover{
+  box-shadow:0 0 20px #00bfff;
+  transform:translateY(-3px);
+}
+
 /* ================= RESPONSIVE ================= */
 
 @media(max-width:768px){
@@ -818,12 +878,38 @@ transform:translateY(0);
 </div>
 </section>
 
-<section id="server-overview">
-  <h2 class="split-text">Server Status</h2>
-  <div class="status-box" id="serverStatus">Loading...</div>
-  <div class="status-buttons">
-    <button class="btn" onclick="copyIP()">Copy IP & Port</button>
-    <a href="https://minecraft-mp.com/server/353699/vote/" target="_blank" class="btn">Vote Server</a>
+<section id="server-overview" class="status-section">
+  <h2>SERVER STATUS</h2>
+
+  <div class="status-container">
+
+    <div class="status-row">
+      <div>
+        🟢 Player Online:<br>
+        <span id="playerCount">Loading...</span>
+      </div>
+      <div>
+        🧭 Date:<br>
+        <span id="serverDate"></span>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="status-info">
+      <div>IP: <b>calmionix.fun</b></div>
+      <div>Port: <b>19139</b></div>
+    </div>
+
+    <hr>
+
+    <div class="status-buttons">
+      <button onclick="copyIP()">COPY IP</button>
+      <a href="https://minecraft-mp.com/server/353699/vote/" target="_blank">
+        <button>VOTE SERVER</button>
+      </a>
+    </div>
+
   </div>
 </section>
 
@@ -1106,38 +1192,41 @@ function copyIP(){
     alert("IP & Port berhasil disalin!");
 }
 /* ================= SERVER STATUS ================= */
-const serverStatus = document.getElementById("serverStatus");
-function animateCounter(element, end){
-  let start = 0;
-  let duration = 1000;
-  let stepTime = 10;
-  let increment = end / (duration / stepTime);
+<script>
+const playerCount = document.getElementById("playerCount");
+const serverDate = document.getElementById("serverDate");
 
-  let counter = setInterval(() => {
-    start += increment;
-    if(start >= end){
-      element.innerText = end;
-      clearInterval(counter);
-    } else {
-      element.innerText = Math.floor(start);
-    }
-  }, stepTime);
+function updateDate(){
+  const now = new Date();
+
+  const options = {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  };
+
+  const tanggal = now.toLocaleDateString('id-ID', options);
+  const jam = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute:'2-digit' });
+
+  serverDate.innerText = `${tanggal}, ${jam} WIB`;
 }
+
+updateDate();
+setInterval(updateDate, 60000);
+
 fetch("https://api.mcsrvstat.us/3/play.calmionix.my.id:19139")
 .then(res => res.json())
 .then(data => {
     if(data.online){
-        serverStatus.innerHTML = "🟢 Online<br><span id='onlineCount'>0</span> / " + data.players.max + " Player";
-
-animateCounter(document.getElementById("onlineCount"), data.players.online);
+        playerCount.innerText = data.players.online + " / " + data.players.max;
     } else {
-        serverStatus.innerHTML = "🔴 Offline";
+        playerCount.innerText = "Server Offline";
     }
 })
-.catch(err => {
-    serverStatus.innerHTML = "🔴 Offline";
-    console.error(err);
+.catch(() => {
+    playerCount.innerText = "Server Offline";
 });
+</script>
 
 /* ================= RATE CARD ================= */
 function waRate(type){
