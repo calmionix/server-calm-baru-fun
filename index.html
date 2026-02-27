@@ -106,10 +106,11 @@ left:0;
 width:100%;
 height:100%;
 background-image:url('assets/hero-bg.png');
-background-size:contain;   /* GANTI DARI cover */
+background-size:cover;      /* BALIKIN KE COVER */
 background-position:center;
 background-repeat:no-repeat;
 z-index:1;
+pointer-events:none;
 }
 
 .hero-btn{
@@ -1216,11 +1217,17 @@ document.querySelectorAll(".split-text").forEach(text => {
   text.innerHTML = "";
 
   letters.forEach(letter => {
-    let span = document.createElement("span");
+  let span = document.createElement("span");
+
+  if(letter === " "){
+    span.innerHTML = "&nbsp;";   // FIX SPASI
+  } else {
     span.innerText = letter;
-    span.style.display = "inline-block";
-    text.appendChild(span);
-  });
+  }
+
+  span.style.display = "inline-block";
+  text.appendChild(span);
+});
 
   gsap.from(text.querySelectorAll("span"), {
     y: 50,
