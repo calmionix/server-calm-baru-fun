@@ -1029,6 +1029,10 @@ Follow & Ikuti Komunitas Calmionix
 <div class="floating-wa" onclick="window.open('https://wa.me/6282130570915')">WA</div>
 <div id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
 <script>
 /* ================= MENU SIDEBAR ================= */
 const sidebar = document.getElementById("sidebar");
@@ -1255,28 +1259,7 @@ gsap.from(".owner-title", {
   }
 });
 
-// Reveal on Scroll
-const reveals = document.querySelectorAll(".reveal");
-
-window.addEventListener("scroll", () => {
-  reveals.forEach(el => {
-    const windowHeight = window.innerHeight;
-    const revealTop = el.getBoundingClientRect().top;
-    const revealPoint = 100;
-
-    if(revealTop < windowHeight - revealPoint){
-      el.classList.add("active");
-    }
-  });
-});
-
 </script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 <script>
 gsap.registerPlugin(ScrollTrigger);
