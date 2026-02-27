@@ -1293,7 +1293,6 @@ function copyIP(){
     alert("IP & Port berhasil disalin!");
 }
 /* ================= SERVER STATUS ================= */
-/* ================= SERVER STATUS ================= */
 
 const playerCount = document.getElementById("playerCount");
 const serverDate = document.getElementById("serverDate");
@@ -1332,7 +1331,8 @@ fetch("https://api.mcsrvstat.us/3/calmionix.fun:19139")
 
 /* ================= RATE CARD ================= */
 function waRate(type){
-    window.open("https://wa.me/6282130570915?text=Halo%20saya%20mau%20endorse%20"+type);
+    // buka popup rate
+    openRatePopup(type);
 }
 
 /* ================= PARALLAX HERO ================= */
@@ -1421,11 +1421,6 @@ function confirmBuy(){
 }
 
 /* ================= RATE POPUP ================= */
-function waRate(type){
-    // buka popup rate
-    openRatePopup(type);
-}
-
 const ratePopup = document.getElementById("ratePopup");
 const ratePopupTitle = document.getElementById("ratePopupTitle");
 const rateOption1 = document.getElementById("rateOption1");
