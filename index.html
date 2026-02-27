@@ -1201,19 +1201,6 @@ window.addEventListener("scroll", () => {
 
 gsap.registerPlugin(ScrollTrigger);
 
-gsap.from(".rank-card", {
-  scrollTrigger: {
-    trigger: "#rank",
-    start: "top 70%",
-  },
-  y: 80,
-  opacity: 0,
-  duration: 1,
-  stagger: 0.2
-});
-
-gsap.registerPlugin(ScrollTrigger);
-
 document.querySelectorAll(".split-text").forEach(text => {
   let letters = text.innerText.split("");
   text.innerHTML = "";
@@ -1303,7 +1290,7 @@ gsap.utils.toArray("h2").forEach(title => {
 });
 
 // ===== CARD STAGGER ANIMATION =====
-ggsap.utils.toArray(".fitur-card, .admin-card, .gallery-item, .rank-card")
+gsap.utils.toArray(".fitur-card, .admin-card, .gallery-item, .rank-card")
 .forEach(section => {
   gsap.from(section, {
     scrollTrigger: {
@@ -1317,19 +1304,6 @@ ggsap.utils.toArray(".fitur-card, .admin-card, .gallery-item, .rank-card")
     ease: "power2.out",
     immediateRender: false
   });
-});
-
-gsap.from(".rank-card", {
-  scrollTrigger: {
-    trigger: "#rank",
-    start: "top 80%",
-    toggleActions: "play none none reverse"
-  },
-  y: 60,
-  opacity: 0,
-  duration: 0.8,
-  stagger: 0.2,
-  clearProps: "all"
 });
 
 // ===== OWNER SECTION SMOOTH ZOOM =====
