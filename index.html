@@ -1239,7 +1239,7 @@ updateWIBTime();
 // Update tiap 1 menit
 setInterval(updateWIBTime, 60000);
 
-fetch("https://api.mcsrvstat.us/3/play.calmionix.my.id:19139")
+fetch("https://api.mcsrvstat.us/3/calmionix.fun:19139")
 .then(res => res.json())
 .then(data => {
     if(data.online){
@@ -1251,7 +1251,6 @@ fetch("https://api.mcsrvstat.us/3/play.calmionix.my.id:19139")
 .catch(() => {
     playerCount.innerText = "Server Offline";
 });
-</script>
 
 /* ================= RATE CARD ================= */
 function waRate(type){
@@ -1395,8 +1394,6 @@ document.querySelectorAll(".split-text").forEach(text => {
     }
   });
 });
-
-</script>
 
 <script>
 gsap.registerPlugin(ScrollTrigger);
