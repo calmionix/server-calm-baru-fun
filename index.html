@@ -1303,19 +1303,19 @@ gsap.utils.toArray("h2").forEach(title => {
 });
 
 // ===== CARD STAGGER ANIMATION =====
-gsap.utils.toArray(".fitur-card, .admin-card, .gallery-item")
+ggsap.utils.toArray(".fitur-card, .admin-card, .gallery-item, .rank-card")
 .forEach(section => {
   gsap.from(section, {
     scrollTrigger: {
       trigger: section,
       start: "top 85%",
-      toggleActions: "play none none reverse"
+      toggleActions: "play none none none"
     },
     y: 60,
-    opacity: 0,
+    autoAlpha: 0,
     duration: 0.8,
     ease: "power2.out",
-    clearProps: "all"
+    immediateRender: false
   });
 });
 
@@ -1357,10 +1357,6 @@ window.addEventListener("click", function(e){
     if(e.target === popup){
         closePopup();
     }
-});
-
-window.addEventListener("load", () => {
-  ScrollTrigger.refresh();
 });
 
 window.addEventListener("load", () => {
