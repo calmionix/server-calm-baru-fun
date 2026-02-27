@@ -16,9 +16,24 @@ scroll-behavior:smooth;
 }
 
 body{
-background:#0a1a2f;
-color:white;
-overflow-x:hidden;
+  background:linear-gradient(to bottom,#071423,#0a1a2f,#081524);
+  color:white;
+  overflow-x:hidden;
+}
+
+section{
+  position:relative;
+}
+
+section::after{
+  content:"";
+  position:absolute;
+  bottom:-1px;
+  left:0;
+  width:100%;
+  height:120px;
+  background:linear-gradient(to bottom, rgba(0,0,0,0), #0a1a2f);
+  pointer-events:none;
 }
 
 /* ================= HAMBURGER ================= */
@@ -1211,11 +1226,10 @@ function copyIP(){
     alert("IP & Port berhasil disalin!");
 }
 /* ================= SERVER STATUS ================= */
-<script>
+/* ================= SERVER STATUS ================= */
+
 const playerCount = document.getElementById("playerCount");
 const serverDate = document.getElementById("serverDate");
-<span id="serverDate"></span>
-  const serverDate = document.getElementById("serverDate");
 
 function updateWIBTime(){
   const now = new Date();
@@ -1233,10 +1247,7 @@ function updateWIBTime(){
   serverDate.innerText = now.toLocaleString("id-ID", options) + " WIB";
 }
 
-// Update pertama kali
 updateWIBTime();
-
-// Update tiap 1 menit
 setInterval(updateWIBTime, 60000);
 
 fetch("https://api.mcsrvstat.us/3/calmionix.fun:19139")
@@ -1395,7 +1406,6 @@ document.querySelectorAll(".split-text").forEach(text => {
   });
 });
 
-<script>
 gsap.registerPlugin(ScrollTrigger);
 
 // ===== HERO ANIMATION =====
@@ -1476,7 +1486,6 @@ window.addEventListener("load", () => {
   ScrollTrigger.refresh();
 });
 
-<script>
 const logo = document.querySelector(".logo");
 
 document.addEventListener("mousemove", (e) => {
