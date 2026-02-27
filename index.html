@@ -1231,16 +1231,23 @@ document.querySelectorAll(".split-text").forEach(text => {
   });
 });
 
-gsap.from(".owner-title", {
-  opacity: 0,
-  y: 60,
-  duration: 1,
-  ease: "power3.out",
-  scrollTrigger: {
-    trigger: ".owner",
-    start: "top 80%"
+gsap.fromTo(".owner-title",
+  {
+    y: 40,
+    opacity: 0
+  },
+  {
+    y: 0,
+    opacity: 1,
+    duration: 1,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".owner-title",
+      start: "top 85%",
+      toggleActions: "play none none none"
+    }
   }
-});
+);
 
 </script>
 
