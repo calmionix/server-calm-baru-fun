@@ -855,6 +855,46 @@ background:#4a49c6;
   transform:translateY(-3px);
 }
 
+/* RATE POPUP STYLING */
+#ratePopup .popup-box{
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #00bfff;
+  padding: 25px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+#ratePopup .popup-option{
+  background:#132c47;
+  padding:10px;
+  margin:8px 0;
+  border-radius:12px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+#ratePopup .popup-option:hover{
+  background:#1a3a5f;
+  color:white;
+}
+
+#ratePopup .popup-buy{
+  margin-top:15px;
+  padding:10px 25px;
+  border:none;
+  border-radius:25px;
+  background:#00bfff;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+#ratePopup .popup-buy:hover{
+  background:#0099cc;
+}
+
 /* ================= RESPONSIVE ================= */
 
 @media(max-width:768px){
@@ -1193,6 +1233,18 @@ Follow & Ikuti Komunitas Calmionix
 </div>
 <button onclick="waRate('Saluran WA')" class="buy-btn">Pesan</button>
 </div>
+
+<!-- RATE POPUP -->
+<div class="popup" id="ratePopup">
+  <div class="popup-box">
+    <h3 id="ratePopupTitle">Pesan Rate</h3>
+    <hr>
+    <div class="popup-option" id="rateOption1"></div>
+    <div class="popup-option" id="rateOption2"></div>
+    <div class="popup-option" id="rateOption3"></div>
+    <hr>
+    <button class="popup-buy" onclick="confirmRate()">Pesan via WA</button>
+  </div>
 </div>
 </section>
 
@@ -1367,6 +1419,67 @@ function confirmBuy(){
 
     window.open("https://wa.me/6282130570915?text=Halo%20Admin,%20saya%20ingin%20membeli%20Rank%20"+selectedRank+"%20("+paket+")");
 }
+
+/* ================= RATE POPUP ================= */
+const ratePopup = document.getElementById("ratePopup");
+const ratePopupTitle = document.getElementById("ratePopupTitle");
+const rateOption1 = document.getElementById("rateOption1");
+const rateOption2 = document.getElementById("rateOption2");
+const rateOption3 = document.getElementById("rateOption3");
+
+let selectedRate = "";
+
+// Fungsi buka popup
+function openRatePopup(type){
+    selectedRate = type;
+    ratePopupTitle.innerText = "Pesan " + type;
+
+    // Contoh: ambil list rate dari tiap card
+    if(type === "TikTok"){
+        rateOption1.innerText = "45K - Tanpa Revisi";
+        rateOption2.innerText = "60K - 1x Revisi Ringan";
+        rateOption3.innerText = "80K - 2x Revisi";
+    } else if(type === "YouTube Short"){
+        rateOption1.innerText = "30K - 1x Revisi";
+        rateOption2.innerText = "";
+        rateOption3.innerText = "";
+    } else if(type === "Konten Only"){
+        rateOption1.innerText = "40K - Tanpa Revisi";
+        rateOption2.innerText = "55K - 1x Revisi";
+        rateOption3.innerText = "";
+    } else if(type === "Saluran WA"){
+        rateOption1.innerText = "25K - 2x Upload";
+        rateOption2.innerText = "15K - 1x Upload";
+        rateOption3.innerText = "";
+    }
+
+    // Sembunyikan opsi kosong
+    [rateOption1, rateOption2, rateOption3].forEach(el=>{
+        el.style.display = el.innerText ? "block" : "none";
+    });
+
+    ratePopup.style.display = "flex";
+}
+
+// Fungsi pilih rate (opsional, bisa klik buat highlight)
+[rateOption1, rateOption2, rateOption3].forEach(el=>{
+    el.addEventListener("click", ()=>{
+        [rateOption1, rateOption2, rateOption3].forEach(e=>e.style.background="#132c47");
+        el.style.background="#5b5ce2";
+    });
+});
+
+// Konfirmasi via WA
+function confirmRate(){
+    window.open("https://wa.me/6282130570915?text=Halo%20Admin,%20saya%20mau%20pesan%20"+selectedRate);
+}
+
+// Klik luar popup untuk close
+window.addEventListener("click", function(e){
+    if(e.target === ratePopup){
+        ratePopup.style.display = "none";
+    }
+});
 
 /* klik luar popup untuk close */
 window.onclick = function(e){
