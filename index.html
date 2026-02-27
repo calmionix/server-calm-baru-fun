@@ -29,7 +29,7 @@ top:20px;
 left:20px;
 font-size:30px;
 cursor:pointer;
-z-index:9999;
+z-index:10000;
 }
 
 .sidebar{
@@ -42,7 +42,7 @@ background:#071423;
 backdrop-filter:blur(15px);
 padding:70px 25px;
 transition:0.4s ease;
-z-index:1003;
+z-index:9998;
 }
 
 .sidebar.active{ left:0; }
@@ -53,7 +53,7 @@ margin:18px 0;
 color:white;
 text-decoration:none;
 font-weight:600;
-transition:0.3s;
+transition:0.4s ease;
 }
 
 .sidebar a:hover{
@@ -77,14 +77,14 @@ height:100%;
 background:rgba(0,0,0,0.6);
 backdrop-filter:blur(6px);
 opacity:0;
-visibility:hidden;
+pointer-events:none;   /* TAMBAH INI */
 transition:0.3s;
-z-index:1001;
+z-index:9997;
 }
 
 .overlay.active{
 opacity:1;
-visibility:visible;
+pointer-events:auto;   /* TAMBAH INI */
 }
 
 /* ================= HERO ================= */
@@ -106,11 +106,10 @@ left:0;
 width:100%;
 height:100%;
 background-image:url('assets/hero-bg.png');
-background-size:cover;
+background-size:contain;   /* GANTI DARI cover */
 background-position:center;
 background-repeat:no-repeat;
 z-index:1;
-pointer-events:none;
 }
 
 .hero-btn{
@@ -660,7 +659,8 @@ background:rgba(0,0,0,0.6);
 display:none;
 justify-content:center;
 align-items:center;
-z-index:9999;
+z-index:11000;
+pointer-events:auto;
 }
 
 .popup-box{
@@ -1030,8 +1030,7 @@ Follow & Ikuti Komunitas Calmionix
 <div id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 <script>
 /* ================= MENU SIDEBAR ================= */
@@ -1320,6 +1319,18 @@ gsap.from(".owner", {
   duration: 1.2,
   ease: "power3.out"
 });
+
+function closePopup(){
+    popup.style.display = "none";
+    selectedPackage = "";
+}
+
+window.addEventListener("click", function(e){
+    if(e.target === popup){
+        closePopup();
+    }
+});
+
 </script>
 
 </body>
