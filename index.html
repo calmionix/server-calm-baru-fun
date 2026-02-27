@@ -1303,18 +1303,33 @@ gsap.utils.toArray("h2").forEach(title => {
 });
 
 // ===== CARD STAGGER ANIMATION =====
-gsap.utils.toArray(".fitur-card, .rank-card, .admin-card, .gallery-item")
+gsap.utils.toArray(".fitur-card, .admin-card, .gallery-item")
 .forEach(section => {
   gsap.from(section, {
     scrollTrigger: {
       trigger: section,
-      start: "top 85%"
+      start: "top 85%",
+      toggleActions: "play none none reverse"
     },
-    y: 80,
+    y: 60,
     opacity: 0,
     duration: 0.8,
-    ease: "power2.out"
+    ease: "power2.out",
+    clearProps: "all"
   });
+});
+
+gsap.from(".rank-card", {
+  scrollTrigger: {
+    trigger: "#rank",
+    start: "top 80%",
+    toggleActions: "play none none reverse"
+  },
+  y: 60,
+  opacity: 0,
+  duration: 0.8,
+  stagger: 0.2,
+  clearProps: "all"
 });
 
 // ===== OWNER SECTION SMOOTH ZOOM =====
@@ -1329,6 +1344,10 @@ gsap.from(".owner", {
   ease: "power3.out"
 });
 
+ScrollTrigger.config({
+  autoRefreshEvents: "visibilitychange,DOMContentLoaded,load,resize"
+});
+
 function closePopup(){
     popup.style.display = "none";
     selectedPackage = "";
@@ -1338,6 +1357,14 @@ window.addEventListener("click", function(e){
     if(e.target === popup){
         closePopup();
     }
+});
+
+window.addEventListener("load", () => {
+  ScrollTrigger.refresh();
+});
+
+window.addEventListener("load", () => {
+  ScrollTrigger.refresh();
 });
 
 </script>
