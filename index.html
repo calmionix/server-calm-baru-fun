@@ -740,7 +740,7 @@ transform:translateY(0);
 </section>
 
 <section id="server-overview">
-  <h2>Server Status</h2>
+  <h2 class="split-text">Server Status</h2>
   <div class="status-box" id="serverStatus">Loading...</div>
   <div class="status-buttons">
     <button class="btn" onclick="copyIP()">Copy IP & Port</button>
@@ -749,7 +749,7 @@ transform:translateY(0);
 </section>
 
 <section id="fitur">
-<h2>Fitur Unggulan</h2>
+<h2 class="split-text">Fitur Unggulan</h2>
 <div class="fitur-grid">
 <div class="fitur-card reveal">
 <img src="assets/fitur-1.png" loading="lazy">
@@ -770,7 +770,7 @@ transform:translateY(0);
 </section>
 
 <section id="galeri">
-<h2>Galeri Server</h2>
+<h2 class="split-text">Galeri Server</h2>
 
 <div class="gallery-wrapper">
 <div class="gallery-track" id="galleryTrack">
@@ -885,7 +885,7 @@ Follow & Ikuti Komunitas Calmionix
 </section>
 
 <section id="rank" class="rank-section">
-<h2>RANK SERVER</h2>
+<h2 class="split-text">RANK SERVER</h2>
 
 <div class="rank-grid">
 
@@ -1061,9 +1061,15 @@ function waRate(type){
 }
 
 /* ================= PARALLAX HERO ================= */
-window.addEventListener("scroll", () => {
-    let offset = window.pageYOffset;
-    document.getElementById("parallax").style.transform = "translateY(" + (offset * 0.5) + "px)";
+gsap.to("#parallax", {
+  yPercent: 20,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "bottom top",
+    scrub: true
+  }
 });
 
 /* ================= GALLERY SLIDE ================= */
@@ -1171,6 +1177,55 @@ gsap.from(".rank-card", {
   opacity: 0,
   duration: 1,
   stagger: 0.2
+});
+
+gsap.registerPlugin(ScrollTrigger);
+
+document.querySelectorAll(".split-text").forEach(text => {
+  let letters = text.innerText.split("");
+  text.innerHTML = "";
+
+  letters.forEach(letter => {
+    let span = document.createElement("span");
+    span.innerText = letter;
+    span.style.display = "inline-block";
+    text.appendChild(span);
+  });
+
+  gsap.from(text.querySelectorAll("span"), {
+    y: 50,
+    opacity: 0,
+    stagger: 0.05,
+    duration: 0.6,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: text,
+      start: "top 80%"
+    }
+  });
+});
+
+gsap.from(".fitur-card", {
+  opacity: 0,
+  y: 80,
+  duration: 0.8,
+  stagger: 0.2,
+  ease: "power3.out",
+  scrollTrigger: {
+    trigger: ".fitur-grid",
+    start: "top 80%"
+  }
+});
+
+gsap.from(".owner-title", {
+  opacity: 0,
+  y: 60,
+  duration: 1,
+  ease: "power3.out",
+  scrollTrigger: {
+    trigger: ".owner",
+    start: "top 80%"
+  }
 });
 
 </script>
