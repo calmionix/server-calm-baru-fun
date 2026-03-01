@@ -31,6 +31,10 @@ section{
   position:relative;
 }
 
+.hero-top-menu{
+  z-index: 1003;
+}
+
 section::after{
   content:"";
   position:absolute;
@@ -667,25 +671,20 @@ display:none;
 
 /* ================= HERO TOP MENU ================= */
 
-.hero-top-menu{
-position:absolute;
-top:25px;
-right:50px;
-z-index:1002;
-display:flex;
-gap:15px;
-}
+@media (max-width:768px){
 
-.hero-top-menu a{
-padding:10px 22px;
-border-radius:30px;
-background:rgba(255,255,255,0.12);
-backdrop-filter:blur(10px);
-color:white;
-text-decoration:none;
-font-weight:600;
-font-size:14px;
-transition:0.3s;
+  .hero-top-menu{
+    position:absolute;
+    top:20px;
+    right:20px;   /* lebih kecil dari 50px */
+    gap:8px;
+  }
+
+  .hero-top-menu a{
+    padding:8px 14px;
+    font-size:11px;
+  }
+
 }
 
 .hero-top-menu a:hover{
