@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Calmionix Server</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
@@ -11,6 +11,7 @@
 html, body{
 max-width:100%;
 overflow-x:hidden;
+-webkit-overflow-scrolling: touch; /* Smooth scroll iOS */
 }
 
 *{
@@ -25,21 +26,14 @@ body{
   background:linear-gradient(to bottom,#071423,#0a1a2f,#081524);
   color:white;
   overflow-x:hidden;
+  /* Prevent elastic scroll di iOS */
+  position: relative;
+  min-height: 100vh;
 }
 
 section{
   position:relative;
-}
-
-section::after{
-  content:"";
-  position:absolute;
-  bottom:-1px;
-  left:0;
-  width:100%;
-  height:120px;
-  background:linear-gradient(to bottom, rgba(0,0,0,0), #0a1a2f);
-  pointer-events:none;
+  /* HAPUS section::after untuk mobile, akan di-handle di media query */
 }
 
 /* ================= HAMBURGER ================= */
@@ -98,26 +92,27 @@ height:100%;
 background:rgba(0,0,0,0.6);
 backdrop-filter:blur(6px);
 opacity:0;
-pointer-events:none;   /* TAMBAH INI */
+pointer-events:none;
 transition:0.3s;
 z-index:9997;
 }
 
 .overlay.active{
 opacity:1;
-pointer-events:auto;   /* TAMBAH INI */
+pointer-events:auto;
 }
 
 /* ================= HERO ================= */
 
 .hero{
 position:relative;
-height:100vh;
+min-height: 100vh; /* Ganti height:100vh agar konten bisa meluncur */
 display:flex;
 justify-content:center;
 align-items:center;
 text-align:center;
 overflow:hidden;
+padding-top: 80px; /* Beri ruang untuk menu */
 }
 
 .hero-bg{
@@ -127,7 +122,7 @@ left:0;
 width:100%;
 height:100%;
 background-image:url('assets/hero-bg.png');
-background-size:cover;      /* BALIKIN KE COVER */
+background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
 z-index:1;
@@ -173,7 +168,9 @@ z-index:2;
 }
 
 .hero-content img.logo{
-  width:850px;
+  width:100%;
+  max-width:800px;
+  height:auto;
   margin-bottom:25px;
   animation:floating 4s ease-in-out infinite;
   transition:0.4s;
@@ -192,7 +189,9 @@ z-index:2;
 }
 
 .hero-content img.ipbox{
-width:460px;
+width:100%;
+max-width:460px;
+height:auto;
 cursor:pointer;
 transition:0.3s;
 }
@@ -202,13 +201,13 @@ transform:scale(1.05);
 }
 
 section{
-padding:90px 8%;
+padding:60px 20px; /* Default padding untuk mobile */
 }
 
 h2{
 text-align:center;
-font-size:40px;
-margin-bottom:40px;
+font-size:26px; /* Default mobile */
+margin-bottom:30px;
 font-weight:800;
 }
 
@@ -218,7 +217,7 @@ font-weight:800;
   bottom:0;
   left:0;
   width:100%;
-  height:200px;
+  height:150px;
   background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, #081524 100%);
   z-index:2;
   pointer-events:none;
@@ -235,76 +234,119 @@ font-weight:800;
 
 /* ================= STATUS ================= */
 
-.status{
+.status-section{
 background:linear-gradient(135deg,#0b1c2d,#122d4b);
+padding:60px 20px;
 text-align:center;
 }
 
-.status-box{
-font-size:20px;
-margin-top:15px;
+.status-container{
+max-width:700px;
+margin:auto;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(15px);
+padding:25px;
+border-radius:25px;
+box-shadow:0 0 40px rgba(0,191,255,0.2);
 }
 
-/* Tombol status */
+.status-row{
+display:flex;
+justify-content:space-between;
+text-align:left;
+font-size:16px;
+gap:15px;
+}
+
+.status-info{
+display:flex;
+justify-content:center;
+gap:20px;
+font-size:16px;
+margin:15px 0;
+text-align:center;
+flex-wrap:wrap;
+}
+
+.status-container hr{
+border:none;
+height:1px;
+background:rgba(255,255,255,0.2);
+margin:20px 0;
+}
+
 .status-buttons{
-  margin-top:20px;
-  display:flex;
-  justify-content:center;
-  gap:15px;
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
 }
 
-.status-buttons .btn{
-  padding:12px 25px;
-  border-radius:30px;
-  background:linear-gradient(45deg,#00bfff,#0066ff);
-  color:white;
-  border:none;
-  cursor:pointer;
-  font-weight:600;
-  transition:0.3s;
+.status-buttons button{
+padding:10px 20px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#00bfff,#0066ff);
+color:white;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+min-width: 150px;
 }
 
-.status-buttons .btn:hover{
-  box-shadow:0 0 20px #00bfff;
+.status-buttons button:hover{
+box-shadow:0 0 20px #00bfff;
+transform:translateY(-3px);
 }
 
 /* ================= FITUR ================= */
 
 #fitur{
 text-align:center;
-padding:80px 20px;
+padding:60px 20px;
 }
 
 .fitur-grid{
 display:flex;
 justify-content:center;
 align-items:stretch;
-gap:30px;
-flex-wrap:wrap;   /* DIUBAH */
+gap:20px;
+flex-wrap:wrap;
 max-width:1100px;
 margin:0 auto;
 }
 
 .fitur-card{
-width:300px; /* Jangan lebih dari 330 */
+width:100%;
+max-width:300px;
 background:#0f1f33;
-border-radius:25px;
-padding:25px;
+border-radius:20px;
+padding:20px;
 text-align:center;
 transition:0.4s;
 }
 
 .fitur-card img{
 width:100%;
-border-radius:20px;
-margin-bottom:15px;
+border-radius:15px;
+margin-bottom:12px;
+}
+
+.fitur-card h3{
+font-size:18px;
+margin-bottom:10px;
+}
+
+.fitur-card p{
+font-size:14px;
+line-height:1.5;
 }
 
 .fitur-card:hover{
 transform:translateY(-8px);
 box-shadow:0 0 25px #00bfff;
 }
-  
+
 /* ================= GALERI FIX ================= */
 
 .gallery-wrapper{
@@ -315,20 +357,22 @@ margin:auto;
 
 .gallery-track{
 display:flex;
-gap:20px;
+gap:15px;
 transition:transform 0.5s ease;
+will-change: transform; /* Optimasi performa */
 }
 
 .gallery-item{
 position:relative;
-flex:0 0 300px;
+flex:0 0 85%; /* Mobile: 85% */
+max-width: 85%;
 }
 
 .gallery-item img{
 width:100%;
 aspect-ratio:16/9;
 object-fit:cover;
-border-radius:18px;
+border-radius:15px;
 transition:0.3s;
 }
 
@@ -368,6 +412,7 @@ cursor:pointer;
 backdrop-filter:blur(6px);
 transition:0.3s;
 margin:5px;
+flex-shrink:0;
 }
 
 .nav-btn:hover{
@@ -375,13 +420,13 @@ background:#00bfff;
 box-shadow:0 0 15px #00bfff;
 }
 
-
 /* ================= OWNER ================= */
 
 .owner{
 text-align:center;
-padding:100px 8%;
-background:url('assets/owner-bg.jpg') center/cover no-repeat fixed;
+padding:60px 20px;
+background:url('assets/owner-bg.jpg') center/cover no-repeat;
+background-attachment: scroll; /* Fixed diganti scroll di mobile */
 }
 
 .owner-wrapper{
@@ -392,7 +437,8 @@ gap:20px;
 }
 
 .main-owner{
-width:320px;
+width:100%;
+max-width:250px;
 border-radius:50px;
 transition:0.4s;
 cursor:pointer;
@@ -404,41 +450,43 @@ box-shadow:0 0 40px #00bfff;
 }
 
 .owner-title{
-  font-size:40px;
-  font-weight:800;
-  color:white;
-  text-shadow:
-    0 0 10px rgba(0,191,255,0.8),
-    0 0 20px rgba(0,191,255,0.6),
-    0 0 30px rgba(0,191,255,0.4);
-  display:inline-block;
-  padding:15px 35px;
-  border-radius:20px;
-  background:rgba(0,0,0,0.5);
-  backdrop-filter:blur(10px);
-  text-shadow:0 0 15px rgba(0,191,255,0.7);
+font-size:24px;
+font-weight:800;
+color:white;
+text-shadow:
+0 0 10px rgba(0,191,255,0.8),
+0 0 20px rgba(0,191,255,0.6),
+0 0 30px rgba(0,191,255,0.4);
+display:inline-block;
+padding:12px 25px;
+border-radius:15px;
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(10px);
+text-shadow:0 0 15px rgba(0,191,255,0.7);
 }
 
 .social-title{
-font-size:20px;
+font-size:16px;
 font-weight:700;
 background:rgba(0,0,0,0.6);
-padding:12px 30px;
-border-radius:30px;
+padding:10px 20px;
+border-radius:25px;
 backdrop-filter:blur(10px);
 }
 
 .social-icons{
 display:flex;
-gap:15px;
+gap:12px;
+flex-wrap:wrap;
+justify-content:center;
 }
 
 .social-icons img{
-width:50px;
-height:50px;
-padding:10px;
+width:40px;
+height:40px;
+padding:8px;
 background:rgba(255,255,255,0.1);
-border-radius:18px;
+border-radius:12px;
 transition:0.3s;
 }
 
@@ -453,44 +501,32 @@ transform:translateY(-5px) scale(1.1);
 display:flex;
 justify-content:center;
 align-items:flex-start;
-gap:30px;
-flex-wrap:wrap;   /* DIUBAH */
+gap:20px;
+flex-wrap:wrap;
 padding-bottom:10px;
 }
 
 .admin-card{
-min-width:170px;
-max-width:170px;
+min-width:120px;
+max-width:120px;
 text-align:center;
 flex-shrink:0;
 }
 
 .admin-card img{
 width:100%;
-border-radius:20px;
+border-radius:15px;
 }
 
 .admin-name{
 font-weight:800;
-font-size:20px;
-margin-top:10px;
+font-size:16px;
+margin-top:8px;
 }
 
 .admin-role{
-font-size:14px;
+font-size:12px;
 opacity:0.7;
-}
-
-.admin-card img{
-width:170px;
-border-radius:25px;
-transition:0.3s;
-cursor:pointer;
-}
-
-.admin-card img:active{
-transform:scale(0.9);
-box-shadow:0 0 25px #00bfff;
 }
 
 .admin-card img:hover{
@@ -501,21 +537,21 @@ transform:scale(1.05);
 
 .rank-section{
 background:linear-gradient(135deg,#5b5ce2,#4a49c6);
-padding:100px 8%;
+padding:60px 20px;
 text-align:center;
 }
 
 .rank-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:40px;
+grid-template-columns:1fr; /* Mobile: 1 kolom */
+gap:25px;
 align-items:stretch;
 }
 
 .rank-card{
 background:white;
-border-radius:30px;
-padding:30px 25px;
+border-radius:25px;
+padding:25px 20px;
 color:#222;
 display:flex;
 flex-direction:column;
@@ -530,54 +566,50 @@ box-shadow:0 20px 50px rgba(0,0,0,0.3);
 }
 
 .rank-img{
-width:200px;
+width:150px;
 margin:0 auto 15px;
 display:block;
 }
 
 .benefit-title{
 font-weight:700;
-margin-bottom:15px;
+margin-bottom:12px;
+font-size:18px;
 }
 
 .benefit-list{
 display:flex;
 flex-direction:column;
-gap:10px;
-margin-bottom:20px;
+gap:8px;
+margin-bottom:15px;
 }
 
 .benefit-item{
 background:linear-gradient(135deg,#f2f2f2,#e6e6e6);
-padding:10px;
-border-radius:12px;
-font-size:14px;
+padding:8px;
+border-radius:10px;
+font-size:13px;
 transition:0.3s;
 cursor:pointer;
 }
 
-/* Animasi Hover */
 .benefit-item:hover{
 background:linear-gradient(135deg,#5b5ce2,#7a7aff);
 color:white;
 transform:scale(1.05);
 }
 
-/* Animasi Klik */
-.benefit-item:active{
-transform:scale(0.95);
-}
-
 .buy-btn{
 margin-top:auto;
-padding:12px 30px;
+padding:10px 25px;
 border:none;
-border-radius:30px;
+border-radius:25px;
 background:linear-gradient(45deg,#5b5ce2,#7a7aff);
 color:white;
 cursor:pointer;
 font-weight:600;
 transition:0.3s;
+font-size:14px;
 }
 
 .buy-btn:hover{
@@ -587,18 +619,22 @@ box-shadow:0 0 20px rgba(90,90,255,0.6);
 
 /* ================= RATE ================= */
 
+.rate-section{
+padding:60px 20px;
+}
+
 .rate-grid{
 display:grid;
-grid-template-columns:repeat(2, 1fr);
-gap:40px;
+grid-template-columns:1fr;
+gap:25px;
 max-width:900px;
 margin:60px auto;
 }
 
 .rate-card{
 background:#0f1f33;
-border-radius:30px;
-padding:30px;
+border-radius:25px;
+padding:25px;
 text-align:center;
 transition:0.4s;
 }
@@ -609,32 +645,31 @@ box-shadow:0 0 30px #00bfff;
 }
 
 .rate-card h3{
-font-size:24px;
-margin-bottom:20px;
+font-size:20px;
+margin-bottom:15px;
 }
 
-.opsi-box{
-background:#132c47;
-padding:10px;
-border-radius:15px;
-margin:8px 0;
-transition:0.3s;
-cursor:pointer;
+.rate-list{
+margin-bottom:15px;
 }
 
-.opsi-box:hover{
-background:#1a3a5f;
+.rate-list div{
+padding:8px;
+margin:5px 0;
+background:rgba(255,255,255,0.05);
+border-radius:10px;
+font-size:14px;
 }
 
 .rate-card button{
-margin-top:15px;
-padding:12px 30px;
+padding:10px 25px;
 border:none;
 border-radius:25px;
 background:#00bfff;
 color:white;
 cursor:pointer;
 transition:0.3s;
+font-size:14px;
 }
 
 .rate-card button:hover{
@@ -648,10 +683,15 @@ position:fixed;
 bottom:20px;
 right:20px;
 background:#25D366;
-padding:15px;
+padding:12px;
 border-radius:50%;
 cursor:pointer;
 z-index:999;
+width:50px;
+height:50px;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 #scrollTop{
@@ -663,28 +703,31 @@ padding:10px 15px;
 border-radius:50%;
 cursor:pointer;
 display:none;
+z-index:998;
 }
 
 /* ================= HERO TOP MENU ================= */
 
 .hero-top-menu{
 position:absolute;
-top:25px;
-right:50px;
+top:80px; /* Beri ruang untuk menu btn */
+right:20px;
 z-index:1002;
 display:flex;
-gap:15px;
+gap:10px;
+flex-wrap:wrap;
+justify-content:flex-end;
 }
 
 .hero-top-menu a{
-padding:10px 22px;
-border-radius:30px;
+padding:8px 16px;
+border-radius:20px;
 background:rgba(255,255,255,0.12);
 backdrop-filter:blur(10px);
 color:white;
 text-decoration:none;
 font-weight:600;
-font-size:14px;
+font-size:12px;
 transition:0.3s;
 }
 
@@ -696,15 +739,15 @@ box-shadow:0 0 15px #00bfff;
 /* ================= HERO OPTIONS ================= */
 
 .hero-options{
-margin-top:25px;
+margin-top:20px;
 display:flex;
 justify-content:center;
-gap:20px;
+gap:15px;
 flex-wrap:wrap;
 }
 
 .hero-btn{
-padding:14px 32px;
+padding:12px 25px;
 border-radius:30px;
 background:linear-gradient(45deg,#00bfff,#0066ff);
 color:white;
@@ -712,6 +755,7 @@ text-decoration:none;
 font-weight:700;
 letter-spacing:1px;
 transition:0.3s;
+font-size:14px;
 }
 
 .hero-btn:hover{
@@ -719,47 +763,42 @@ box-shadow:0 0 20px #00bfff;
 transform:translateY(-3px);
 }
 
-/* ================= POPUP RANK ================= */
+/* ================= POPUP ================= */
 
 .popup {
-  solation: isolate;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-
   display: none;
   align-items: center;
   justify-content: center;
-
   background: rgba(0,0,0,0.7);
   backdrop-filter: blur(5px);
-
   z-index: 99999;
+  padding: 20px;
 }
 
 .popup-box{
   background: linear-gradient(135deg, #0f172a, #1e293b);
   color: #00bfff;
-  padding: 30px;
+  padding: 25px;
   border-radius: 15px;
-  width: 90%;
+  width: 100%;
   max-width: 400px;
-}
-
-@keyframes popupAnim{
-from{transform:scale(0.8);opacity:0;}
-to{transform:scale(1);opacity:1;}
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .popup-option{
 background:#132c47;
-padding:10px;
-margin:10px 0;
+padding:12px;
+margin:8px 0;
 border-radius:10px;
 cursor:pointer;
 transition:0.3s;
+font-size:14px;
 }
 
 .popup-option:hover{
@@ -769,245 +808,193 @@ color:white;
 
 .popup-buy{
 margin-top:15px;
-padding:10px 25px;
+padding:12px 25px;
 border:none;
 border-radius:25px;
 background:#00bfff;
 color:white;
 cursor:pointer;
+transition:0.3s;
+width: 100%;
+font-weight:600;
 }
 
 .popup-buy:hover{
-background:#4a49c6;
+background:#0099cc;
 }
 
-.status-section{
-  background:#0b1c2d;
-  padding:80px 20px;
-  text-align:center;
+/* ================= RESPONSIVE BREAKPOINTS ================= */
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px){
+  .hero-content img.logo{
+    max-width:600px;
+  }
+  
+  .gallery-item{
+    flex:0 0 45%; /* 2 item */
+    max-width:45%;
+  }
+  
+  .rank-grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .rate-grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .admin-card{
+    min-width:140px;
+    max-width:140px;
+  }
+  
+  .owner-title{
+    font-size:30px;
+  }
 }
 
-.status-container{
-  max-width:700px;
-  margin:auto;
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(15px);
-  padding:30px;
-  border-radius:25px;
-  box-shadow:0 0 40px rgba(0,191,255,0.2);
+/* Desktop */
+@media (min-width: 1025px){
+  section{
+    padding:90px 8%;
+  }
+  
+  h2{
+    font-size:40px;
+    margin-bottom:40px;
+  }
+  
+  .hero-content img.logo{
+    max-width:800px;
+  }
+  
+  .gallery-item{
+    flex:0 0 300px;
+    max-width:300px;
+  }
+  
+  .rank-grid{
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .rate-grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .admin-card{
+    min-width:170px;
+    max-width:170px;
+  }
+  
+  .owner{
+    padding:100px 8%;
+  }
+  
+  .owner-title{
+    font-size:40px;
+    padding:15px 35px;
+  }
+  
+  .social-title{
+    font-size:20px;
+    padding:12px 30px;
+  }
+  
+  .social-icons img{
+    width:50px;
+    height:50px;
+    padding:10px;
+  }
+  
+  .main-owner{
+    width:320px;
+  }
+  
+  .status-buttons button{
+    min-width:180px;
+  }
 }
 
-.status-row{
-  display:flex;
-  justify-content:space-between;
-  text-align:left;
-  font-size:18px;
+/* Mobile Specific Fixes */
+@media (max-width: 768px){
+  .menu-btn{
+    top:15px;
+    left:15px;
+    font-size:26px;
+  }
+  
+  .sidebar{
+    width:260px;
+    padding:60px 20px;
+  }
+  
+  .hero-top-menu{
+    top:70px;
+    right:15px;
+  }
+  
+  .hero-top-menu a{
+    padding:6px 12px;
+    font-size:11px;
+  }
+  
+  .hero-options{
+    gap:10px;
+  }
+  
+  .hero-btn{
+    padding:10px 20px;
+    font-size:13px;
+  }
+  
+  .status-row{
+    font-size:14px;
+  }
+  
+  .status-info{
+    font-size:14px;
+    gap:15px;
+  }
+  
+  .floating-wa{
+    bottom:15px;
+    right:15px;
+    width:45px;
+    height:45px;
+  }
+  
+  #scrollTop{
+    bottom:15px;
+    left:15px;
+  }
+  
+  /* Disable parallax logo on mobile */
+  .hero-content img.logo{
+    animation: none;
+  }
+  
+  /* Prevent background fixed issues */
+  .owner{
+    background-attachment: scroll;
+  }
+  
+  /* Hide decorative gradients on mobile to reduce repaint */
+  section::after{
+    display:none;
+  }
 }
 
-.status-info{
-  display:flex;
-  justify-content:center;   /* TENGAH */
-  gap:40px;                 /* Jarak IP & Port */
-  font-size:18px;
-  margin:15px 0;
-  text-align:center;
+/* Tambahan untuk mencegah tumpukan */
+body{
+  padding-bottom: 80px; /* Ruang untuk floating buttons */
 }
-
-.status-container hr{
-  border:none;
-  height:1px;
-  background:rgba(255,255,255,0.2);
-  margin:20px 0;
-}
-
-.status-buttons{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-}
-
-.status-buttons button,
-.status-buttons a button{
-  width:180px;        /* SAMA SEMUA */
-  padding:12px 0;
-  border:none;
-  border-radius:30px;
-  background:linear-gradient(45deg,#00bfff,#0066ff);
-  color:white;
-  font-weight:600;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.status-buttons button:hover{
-  box-shadow:0 0 20px #00bfff;
-  transform:translateY(-3px);
-}
-.status-buttons button{
-  flex:1;
-  padding:12px;
-  border:none;
-  border-radius:30px;
-  background:linear-gradient(45deg,#00bfff,#0066ff);
-  color:white;
-  font-weight:600;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.status-buttons button:hover{
-  box-shadow:0 0 20px #00bfff;
-  transform:translateY(-3px);
-}
-
-/* RATE POPUP STYLING */
-#ratePopup .popup-box{
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  color: #00bfff;
-  padding: 25px;
-  border-radius: 20px;
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-}
-
-#ratePopup .popup-option{
-  background:#132c47;
-  padding:10px;
-  margin:8px 0;
-  border-radius:12px;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-#ratePopup .popup-option:hover{
-  background:#1a3a5f;
-  color:white;
-}
-
-#ratePopup .popup-buy{
-  margin-top:15px;
-  padding:10px 25px;
-  border:none;
-  border-radius:25px;
-  background:#00bfff;
-  color:white;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-#ratePopup .popup-buy:hover{
-  background:#0099cc;
-}
-
-/* ================= RESPONSIVE ================= */
-
-/* ================= MOBILE FIX ================= */
 
 @media (max-width: 768px){
-
-section{
-padding:60px 20px;
+  body{
+    padding-bottom: 70px;
+  }
 }
-
-h2{
-font-size:26px;
-}
-
-/* HERO */
-.hero{
-height:auto;
-padding:120px 20px 80px;
-}
-
-.hero-content img.logo{
-width:80%;
-max-width:300px;
-}
-
-.hero-content img.ipbox{
-width:80%;
-max-width:250px;
-}
-
-.hero-top-menu{
-position:static;
-margin-bottom:20px;
-justify-content:center;
-flex-wrap:wrap;
-}
-
-.hero-options{
-flex-direction:column;
-gap:12px;
-}
-
-/* STATUS */
-.status-row{
-flex-direction:column;
-gap:15px;
-text-align:center;
-}
-
-.status-info{
-flex-direction:column;
-gap:8px;
-}
-
-.status-buttons{
-flex-direction:column;
-gap:10px;
-}
-
-.status-buttons button{
-width:100%;
-}
-
-/* FITUR */
-.fitur-card{
-width:100%;
-max-width:350px;
-margin:auto;
-}
-
-/* RANK */
-.rank-grid{
-grid-template-columns:1fr;
-}
-
-/* RATE */
-.rate-grid{
-grid-template-columns:1fr;
-}
-
-/* ADMIN */
-.admin-card{
-min-width:140px;
-max-width:140px;
-}
-
-/* GALLERY */
-.gallery-item{
-flex:0 0 85%;
-}
-
-}
-@keyframes fadeUp{
-from{
-opacity:0;
-transform:translateY(40px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-#smooth-wrapper,
-#smooth-content {
-  pointer-events: auto;
-}
-
 </style>
 </head>
 
@@ -1041,9 +1028,9 @@ transform:translateY(0);
 </div>
 
 <div class="hero-content">
-<img src="assets/logo-calmionix.png" class="logo">
+<img src="assets/logo-calmionix.png" class="logo" alt="Calmionix Logo">
 <br>
-<img src="assets/ip-port.png" class="ipbox" onclick="copyIP()">
+<img src="assets/ip-port.png" class="ipbox" onclick="copyIP()" alt="IP Server">
 <div class="hero-options">
   <a href="#fitur" class="hero-btn">SERVER LIST</a>
   <a href="#rate" class="hero-btn">ENDORSE</a>
@@ -1089,17 +1076,17 @@ transform:translateY(0);
 <h2 class="split-text">Fitur Unggulan</h2>
 <div class="fitur-grid">
 <div class="fitur-card">
-<img src="assets/fitur-1.png" loading="lazy">
+<img src="assets/fitur-1.png" loading="lazy" alt="Hewan Peliharaan">
 <h3>HEWAN PELIHARAAN</h3>
 <p>Gunakan command /pets untuk summon pet keren dan temani petualanganmu.</p>
 </div>
 <div class="fitur-card">
-<img src="assets/fitur-2.png" loading="lazy">
+<img src="assets/fitur-2.png" loading="lazy" alt="Dungeon Slime">
 <h3>DUNGEON SLIME</h3>
 <p>Masuk dungeon via /warps dan lawan slime kuat dengan reward menarik.</p>
 </div>
 <div class="fitur-card">
-<img src="assets/fitur-3.png" loading="lazy">
+<img src="assets/fitur-3.png" loading="lazy" alt="Custom World">
 <h3>CUSTOM WORLD</h3>
 <p>World survival dengan custom biome unik, terrain berbeda dari vanilla dan pengalaman eksplorasi lebih seru.</p>
 </div>
@@ -1114,7 +1101,7 @@ transform:translateY(0);
 
 <!-- FOTO 1 -->
 <div class="gallery-item">
-<img src="assets/gallery1.png" loading="lazy">
+<img src="assets/gallery1.png" loading="lazy" alt="Galeri 1">
 <a href="assets/gallery1.png" download class="download-btn">
 ⬇ Download
 </a>
@@ -1122,7 +1109,7 @@ transform:translateY(0);
 
 <!-- FOTO 2 -->
 <div class="gallery-item">
-<img src="assets/gallery2.png" loading="lazy">
+<img src="assets/gallery2.png" loading="lazy" alt="Galeri 2">
 <a href="assets/gallery2.png" download class="download-btn">
 ⬇ Download
 </a>
@@ -1130,7 +1117,7 @@ transform:translateY(0);
 
 <!-- FOTO 3 -->
 <div class="gallery-item">
-<img src="assets/gallery3.png" loading="lazy">
+<img src="assets/gallery3.png" loading="lazy" alt="Galeri 3">
 <a href="assets/gallery3.png" download class="download-btn">
 ⬇ Download
 </a>
@@ -1138,7 +1125,7 @@ transform:translateY(0);
 
 <!-- FOTO 4 -->
 <div class="gallery-item">
-<img src="assets/gallery4.png" loading="lazy">
+<img src="assets/gallery4.png" loading="lazy" alt="Galeri 4">
 <a href="assets/gallery4.png" download class="download-btn">
 ⬇ Download
 </a>
@@ -1146,7 +1133,7 @@ transform:translateY(0);
 
 <!-- FOTO 5 -->
 <div class="gallery-item">
-<img src="assets/gallery5.png" loading="lazy">
+<img src="assets/gallery5.png" loading="lazy" alt="Galeri 5">
 <a href="assets/gallery5.png" download class="download-btn">
 ⬇ Download
 </a>
@@ -1154,7 +1141,7 @@ transform:translateY(0);
 
 <!-- FOTO 6 -->
 <div class="gallery-item">
-<img src="assets/gallery6.png" loading="lazy">
+<img src="assets/gallery6.png" loading="lazy" alt="Galeri 6">
 <a href="assets/gallery6.png" download class="download-btn">
 ⬇ Download
 </a>
@@ -1163,7 +1150,7 @@ transform:translateY(0);
 </div>
 </div>
 
-<div class="gallery-controls">
+<div class="gallery-controls" style="text-align:center; margin-top:15px;">
 <button class="nav-btn" onclick="slideLeft()">❮</button>
 <button class="nav-btn" onclick="slideRight()">❯</button>
 </div>
@@ -1174,18 +1161,18 @@ transform:translateY(0);
 
 <div class="owner-wrapper">
 
-<img src="assets/owner.png" class="main-owner">
+<img src="assets/owner.png" class="main-owner" alt="Owner Calmionix">
 
 <div class="social-title">
 Follow & Ikuti Komunitas Calmionix
 </div>
 
 <div class="social-icons">
-<a href="https://www.tiktok.com/@calmionix.id?_r=1&_t=ZS-94GU3BpJbZE"><img src="assets/icon-tiktok.jpeg"></a>
-<a href="https://www.youtube.com/@Calmionix"><img src="assets/icon-youtube.jpeg"></a>
-<a href="https://www.instagram.com/calmionix?igsh=MXZuM2pkZTdtdWRrdw=="><img src="assets/icon-instagram.jpeg"></a>
-<a href="https://wa.me/6282130570915"><img src="assets/icon-whatsapp.jpeg"></a>
-<a href="https://discord.gg/FUC9G8y5Rb"><img src="assets/icon-discord.jpeg"></a>
+<a href="https://www.tiktok.com/@calmionix.id?_r=1&_t=ZS-94GU3BpJbZE"><img src="assets/icon-tiktok.jpeg" alt="TikTok"></a>
+<a href="https://www.youtube.com/@Calmionix"><img src="assets/icon-youtube.jpeg" alt="YouTube"></a>
+<a href="https://www.instagram.com/calmionix?igsh=MXZuM2pkZTdtdWRrdw=="><img src="assets/icon-instagram.jpeg" alt="Instagram"></a>
+<a href="https://wa.me/6282130570915"><img src="assets/icon-whatsapp.jpeg" alt="WhatsApp"></a>
+<a href="https://discord.gg/FUC9G8y5Rb"><img src="assets/icon-discord.jpeg" alt="Discord"></a>
 </div>
 
 </div>
@@ -1195,31 +1182,30 @@ Follow & Ikuti Komunitas Calmionix
 <h2 style="margin-top:50px;">Admin List</h2>
   <div class="admin-grid">
     <div class="admin-card">
-      <img src="assets/admin1.jpeg">
+      <img src="assets/admin1.jpeg" alt="Admin 1">
       <div class="admin-name">LUZZYMC</div>
       <div class="admin-role">Builder Server</div>
     </div>
     <div class="admin-card">
-      <img src="assets/admin5.jpeg">
+      <img src="assets/admin5.jpeg" alt="Admin 5">
       <div class="admin-name">YUDASENSEI</div>
       <div class="admin-role">Developer Server</div>
     </div>
     <div class="admin-card">
-      <img src="assets/admin3.jpeg">
+      <img src="assets/admin3.jpeg" alt="Admin 3">
       <div class="admin-name">NAGAFLOW</div>
       <div class="admin-role">Developer Server</div>
     </div>
     <div class="admin-card">
-      <img src="assets/admin4.jpeg">
+      <img src="assets/admin4.jpeg" alt="Admin 4">
       <div class="admin-name">REYNARD</div>
       <div class="admin-role">Builder Server</div>
     </div>
     <div class="admin-card">
-      <img src="assets/admin6.jpeg">
+      <img src="assets/admin6.jpeg" alt="Admin 6">
       <div class="admin-name">ANANLOH</div>
       <div class="admin-role">Builder Server</div>
     </div>
-
 </div>
 </section>
 
@@ -1230,7 +1216,7 @@ Follow & Ikuti Komunitas Calmionix
 
 <!-- VIP -->
 <div class="rank-card">
-<img src="assets/rank-new-vip.png" class="rank-img">
+<img src="assets/rank-new-vip.png" class="rank-img" alt="Rank VIP">
 
 <div class="benefit-title">BENEFIT</div>
 
@@ -1248,7 +1234,7 @@ Follow & Ikuti Komunitas Calmionix
 
 <!-- VIP+ -->
 <div class="rank-card">
-<img src="assets/rank-vipplus.png" class="rank-img">
+<img src="assets/rank-vipplus.png" class="rank-img" alt="Rank VIP+">
 
 <div class="benefit-title">BENEFIT</div>
 
@@ -1265,7 +1251,7 @@ Follow & Ikuti Komunitas Calmionix
 
 <!-- MVP -->
 <div class="rank-card">
-<img src="assets/rank-mvp.png" class="rank-img">
+<img src="assets/rank-mvp.png" class="rank-img" alt="Rank MVP">
 
 <div class="benefit-title">BENEFIT</div>
 
@@ -1323,73 +1309,94 @@ Follow & Ikuti Komunitas Calmionix
 </div>
 <button onclick="waRate('Saluran WA')" class="buy-btn">Pesan</button>
 </div>
-
-<!-- RATE POPUP -->
-<div class="popup" id="ratePopup">
-  <div class="popup-box">
-    <h3 id="ratePopupTitle">Pesan Rate</h3>
-    <hr>
-    <div class="popup-option" id="rateOption1"></div>
-    <div class="popup-option" id="rateOption2"></div>
-    <div class="popup-option" id="rateOption3"></div>
-    <hr>
-    <button class="popup-buy" onclick="confirmRate()">Pesan via WA</button>
-  </div>
 </div>
 </section>
 
-<div class="floating-wa" onclick="window.open('https://wa.me/6282130570915')">WA</div>
-<div id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
-
+<div class="floating-wa" onclick="window.open('https://wa.me/6282130570915')">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
 </div>
+<div id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
 </div>
 
+<!-- POPUP RANK -->
 <div class="popup" id="rankPopup">
 <div class="popup-box">
 <h3 id="popupTitle">Beli Rank</h3>
-<hr>
+<hr style="border:none;height:1px;background:rgba(255,255,255,0.2);margin:15px 0;">
 <div class="popup-option" onclick="selectPackage('monthly')" id="monthlyText"></div>
 <div class="popup-option" onclick="selectPackage('permanent')" id="permanentText"></div>
-<hr>
-<p>Permanent Hingga Ganti Season</p>
-<button class="popup-buy" onclick="confirmBuy()">Buy</button>
+<hr style="border:none;height:1px;background:rgba(255,255,255,0.2);margin:15px 0;">
+<p style="font-size:13px;opacity:0.8;margin-bottom:15px;">Permanent Hingga Ganti Season</p>
+<button class="popup-buy" onclick="confirmBuy()">Buy via WA</button>
 </div>
+</div>
+
+<!-- POPUP RATE -->
+<div class="popup" id="ratePopup">
+  <div class="popup-box">
+    <h3 id="ratePopupTitle">Pesan Rate</h3>
+    <hr style="border:none;height:1px;background:rgba(255,255,255,0.2);margin:15px 0;">
+    <div class="popup-option" id="rateOption1"></div>
+    <div class="popup-option" id="rateOption2"></div>
+    <div class="popup-option" id="rateOption3"></div>
+    <hr style="border:none;height:1px;background:rgba(255,255,255,0.2);margin:15px 0;">
+    <button class="popup-buy" onclick="confirmRate()">Pesan via WA</button>
+  </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-
 <script>
 
-gsap.registerPlugin(ScrollTrigger);
+// ===== MOBILE DETECTION =====
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth <= 768;
 
-/* ================= MENU SIDEBAR ================= */
+// ===== MENU SIDEBAR =====
 const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
 
 function openMenu(){
     sidebar.classList.add("active");
     overlay.classList.add("active");
+    // Prevent body scroll when menu open
+    document.body.style.overflow = 'hidden';
 }
+
 function closeMenu(){
     sidebar.classList.remove("active");
     overlay.classList.remove("active");
+    document.body.style.overflow = '';
 }
 
-/* ================= COPY IP ================= */
+// Close menu when clicking overlay
+overlay.addEventListener('click', closeMenu);
+
+// ===== COPY IP =====
 function copyIP(){
-    navigator.clipboard.writeText("calmionix.fun:19139");
-    alert("IP & Port berhasil disalin!");
+    const ipText = "calmionix.fun:19139";
+    navigator.clipboard.writeText(ipText).then(() => {
+        alert("IP & Port berhasil disalin!");
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+        // Fallback for older browsers
+        const textArea = document.createElement("textarea");
+        textArea.value = ipText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("Copy");
+        textArea.remove();
+        alert("IP & Port berhasil disalin!");
+    });
 }
-/* ================= SERVER STATUS ================= */
 
+// ===== SERVER STATUS =====
 const playerCount = document.getElementById("playerCount");
 const serverDate = document.getElementById("serverDate");
 
 function updateWIBTime(){
   const now = new Date();
-
   const options = {
     timeZone: "Asia/Jakarta",
     weekday: "long",
@@ -1399,7 +1406,6 @@ function updateWIBTime(){
     hour: "2-digit",
     minute: "2-digit"
   };
-
   serverDate.innerText = now.toLocaleString("id-ID", options) + " WIB";
 }
 
@@ -1419,50 +1425,60 @@ fetch("https://api.mcsrvstat.us/3/calmionix.fun:19139")
     playerCount.innerText = "Server Offline";
 });
 
-/* ================= RATE CARD ================= */
-function waRate(type){
-    // buka popup rate
-    openRatePopup(type);
-}
-
-/* ================= PARALLAX HERO ================= */
-gsap.to("#parallax", {
-  yPercent: 20,
-  ease: "none",
-  scrollTrigger: {
-    trigger: ".hero",
-    start: "top top",
-    end: "bottom top",
-    scrub: true
-  }
-});
-
-/* ================= GALLERY SLIDE ================= */
+// ===== GALLERY SLIDER (RESPONSIVE) =====
 const galleryTrack = document.getElementById("galleryTrack");
 let pos = 0;
-const itemWidth = 320;
-const totalItems = galleryTrack.children.length;
-const visibleItems = 3;
-const maxScroll = -(itemWidth * (totalItems - visibleItems));
+
+function updateGalleryParams() {
+  if (!galleryTrack || !galleryTrack.children.length) return { itemWidth: 0, maxScroll: 0 };
+  
+  const container = galleryTrack.parentElement;
+  const containerWidth = container.offsetWidth;
+  const item = galleryTrack.children[0];
+  const itemWidth = item.offsetWidth;
+  const totalItems = galleryTrack.children.length;
+  
+  // Calculate visible items based on container width
+  let visibleItems = Math.floor(containerWidth / itemWidth);
+  if (visibleItems < 1) visibleItems = 1;
+  
+  const maxScroll = -(itemWidth * (totalItems - visibleItems));
+  return { itemWidth, maxScroll, visibleItems };
+}
 
 function slideLeft(){
-    pos += itemWidth;
-    if(pos > 0){
-        pos = maxScroll; // lompat ke akhir
-    }
-    galleryTrack.style.transform = "translateX(" + pos + "px)";
+  const { itemWidth, maxScroll } = updateGalleryParams();
+  if (!itemWidth) return;
+  
+  pos += itemWidth;
+  if(pos > 0){
+    pos = maxScroll; // jump to end
+  }
+  galleryTrack.style.transform = `translateX(${pos}px)`;
 }
 
 function slideRight(){
-    pos -= itemWidth;
-    if(pos < maxScroll){
-        pos = 0; // balik ke awal
-    }
-    galleryTrack.style.transform = "translateX(" + pos + "px)";
+  const { itemWidth, maxScroll } = updateGalleryParams();
+  if (!itemWidth) return;
+  
+  pos -= itemWidth;
+  if(pos < maxScroll){
+    pos = 0; // back to start
+  }
+  galleryTrack.style.transform = `translateX(${pos}px)`;
 }
 
-/* ================= RANK POPUP ================= */
+// Reset position on resize
+let resizeTimeout;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    pos = 0;
+    galleryTrack.style.transform = 'translateX(0)';
+  }, 250);
+});
 
+// ===== RANK POPUP =====
 const popup = document.getElementById("rankPopup");
 const popupTitle = document.getElementById("popupTitle");
 const monthlyText = document.getElementById("monthlyText");
@@ -1473,20 +1489,17 @@ let selectedPackage = "";
 
 function openPopup(rank){
     selectedRank = rank;
+    selectedPackage = ""; // Reset selection
 
     if(rank === "VIP"){
         popupTitle.innerText = "Beli Rank VIP";
         monthlyText.innerText = "Bulanan - 10k";
         permanentText.innerText = "Permanent - 30k";
-    }
-
-    if(rank === "VIP+"){
+    } else if(rank === "VIP+"){
         popupTitle.innerText = "Beli Rank VIP+";
         monthlyText.innerText = "Bulanan - 30k";
         permanentText.innerText = "Permanent - 50k";
-    }
-
-    if(rank === "MVP"){
+    } else if(rank === "MVP"){
         popupTitle.innerText = "Beli Rank MVP";
         monthlyText.innerText = "Bulanan - 50k";
         permanentText.innerText = "Permanent - 80k";
@@ -1497,6 +1510,15 @@ function openPopup(rank){
 
 function selectPackage(type){
     selectedPackage = type;
+    // Visual feedback
+    document.querySelectorAll('#rankPopup .popup-option').forEach(opt => {
+        opt.style.background = "#132c47";
+    });
+    if(type === 'monthly') {
+        monthlyText.style.background = "#5b5ce2";
+    } else if(type === 'permanent') {
+        permanentText.style.background = "#5b5ce2";
+    }
 }
 
 function confirmBuy(){
@@ -1506,209 +1528,194 @@ function confirmBuy(){
     }
 
     let paket = selectedPackage === "monthly" ? "Bulanan" : "Permanent";
-
-    window.open("https://wa.me/6282130570915?text=Halo%20Admin,%20saya%20ingin%20membeli%20Rank%20"+selectedRank+"%20("+paket+")");
+    const message = `Halo Admin, saya ingin membeli Rank ${selectedRank} (${paket})`;
+    window.open("https://wa.me/6282130570915?text=" + encodeURIComponent(message));
 }
 
-/* ================= RATE POPUP ================= */
+// ===== RATE POPUP =====
 const ratePopup = document.getElementById("ratePopup");
 const ratePopupTitle = document.getElementById("ratePopupTitle");
 const rateOption1 = document.getElementById("rateOption1");
 const rateOption2 = document.getElementById("rateOption2");
 const rateOption3 = document.getElementById("rateOption3");
 
-let selectedRate = "";
+let selectedRateOption = "";
 
-// Fungsi buka popup
 function openRatePopup(type){
-    selectedRate = type;
+    selectedRateOption = "";
     ratePopupTitle.innerText = "Pesan " + type;
+    selectedRate = type;
 
-    // Contoh: ambil list rate dari tiap card
+    // Reset all options
+    [rateOption1, rateOption2, rateOption3].forEach(el => {
+        el.style.background = "#132c47";
+        el.style.display = "none";
+    });
+
     if(type === "TikTok"){
         rateOption1.innerText = "45K - Tanpa Revisi";
         rateOption2.innerText = "60K - 1x Revisi Ringan";
         rateOption3.innerText = "80K - 2x Revisi";
+        rateOption1.style.display = "block";
+        rateOption2.style.display = "block";
+        rateOption3.style.display = "block";
     } else if(type === "YouTube Short"){
         rateOption1.innerText = "30K - 1x Revisi";
-        rateOption2.innerText = "";
-        rateOption3.innerText = "";
+        rateOption1.style.display = "block";
     } else if(type === "Konten Only"){
         rateOption1.innerText = "40K - Tanpa Revisi";
         rateOption2.innerText = "55K - 1x Revisi";
-        rateOption3.innerText = "";
+        rateOption1.style.display = "block";
+        rateOption2.style.display = "block";
     } else if(type === "Saluran WA"){
         rateOption1.innerText = "25K - 2x Upload";
         rateOption2.innerText = "15K - 1x Upload";
-        rateOption3.innerText = "";
+        rateOption1.style.display = "block";
+        rateOption2.style.display = "block";
     }
-
-    // Sembunyikan opsi kosong
-    [rateOption1, rateOption2, rateOption3].forEach(el=>{
-        el.style.display = el.innerText ? "block" : "none";
-    });
 
     ratePopup.style.display = "flex";
 }
 
-// Fungsi pilih rate (opsional, bisa klik buat highlight)
-[rateOption1, rateOption2, rateOption3].forEach(el=>{
-    el.addEventListener("click", ()=>{
-        [rateOption1, rateOption2, rateOption3].forEach(e=>e.style.background="#132c47");
-        el.style.background="#5b5ce2";
+// Add click listeners for rate options
+[rateOption1, rateOption2, rateOption3].forEach(el => {
+    el.addEventListener("click", () => {
+        [rateOption1, rateOption2, rateOption3].forEach(e => {
+            e.style.background = "#132c47";
+        });
+        el.style.background = "#5b5ce2";
+        selectedRateOption = el.innerText;
     });
 });
 
-// Konfirmasi via WA
 function confirmRate(){
-    window.open("https://wa.me/6282130570915?text=Halo%20Admin,%20saya%20mau%20pesan%20"+selectedRate);
+    if(!selectedRateOption){
+        alert("Pilih opsi harga dulu!");
+        return;
+    }
+    const message = `Halo Admin, saya mau pesan ${selectedRate} - ${selectedRateOption}`;
+    window.open("https://wa.me/6282130570915?text=" + encodeURIComponent(message));
 }
 
-// Klik luar popup untuk close
+// Close popups when clicking outside
 window.addEventListener("click", function(e){
     if(e.target === ratePopup){
         ratePopup.style.display = "none";
     }
-});
-
-/* klik luar popup untuk close */
-window.onclick = function(e){
     if(e.target === popup){
         popup.style.display = "none";
+        selectedPackage = "";
     }
-}
+});
 
-const reveals = document.querySelectorAll(".reveal");
-
+// ===== SCROLL TOP BUTTON =====
+const scrollTopBtn = document.getElementById("scrollTop");
 window.addEventListener("scroll", () => {
-  const windowHeight = window.innerHeight;
-
-  reveals.forEach(el => {
-    const elementTop = el.getBoundingClientRect().top;
-
-    if(elementTop < windowHeight - 100){
-      el.classList.add("active");
+    if (window.pageYOffset > 300) {
+        scrollTopBtn.style.display = "flex";
+    } else {
+        scrollTopBtn.style.display = "none";
     }
-  });
 });
 
-document.querySelectorAll(".split-text").forEach(text => {
-  let letters = text.innerText.split("");
-  text.innerHTML = "";
-
-  letters.forEach(letter => {
-  let span = document.createElement("span");
-
-  if(letter === " "){
-    span.innerHTML = "&nbsp;";   // FIX SPASI
-  } else {
-    span.innerText = letter;
-  }
-
-  span.style.display = "inline-block";
-  text.appendChild(span);
-});
-
-  gsap.from(text.querySelectorAll("span"), {
-    y: 50,
-    opacity: 0,
-    stagger: 0.05,
-    duration: 0.6,
-    ease: "power3.out",
-    scrollTrigger: {
-      trigger: text,
-      start: "top 80%"
-    }
-  });
-});
-
+// ===== LOADING GSAP ANIMATIONS =====
 gsap.registerPlugin(ScrollTrigger);
 
-// ===== HERO ANIMATION =====
-gsap.from(".hero h1", {
-  y: 80,
-  opacity: 0,
-  duration: 1,
-  ease: "power3.out"
-});
-
-gsap.from(".hero p", {
-  y: 40,
-  opacity: 0,
-  duration: 1,
-  delay: 0.3,
-  ease: "power3.out"
-});
-
-// ===== SECTION TITLE ANIMATION =====
-gsap.utils.toArray("h2").forEach(title => {
-  gsap.from(title, {
+// Hanya jalankan animasi heavy di desktop (non-mobile)
+if (!isMobile) {
+  // Parallax hero background (disabled on mobile)
+  gsap.to("#parallax", {
+    yPercent: 20,
+    ease: "none",
     scrollTrigger: {
-      trigger: title,
+      trigger: ".hero",
+      start: "top top",
+      end: "bottom top",
+      scrub: true
+    }
+  });
+
+  // Split text animation
+  document.querySelectorAll(".split-text").forEach(text => {
+    let letters = text.innerText.split("");
+    text.innerHTML = "";
+    letters.forEach(letter => {
+      let span = document.createElement("span");
+      if(letter === " "){
+        span.innerHTML = "&nbsp;";
+      } else {
+        span.innerText = letter;
+      }
+      span.style.display = "inline-block";
+      text.appendChild(span);
+    });
+
+    gsap.from(text.querySelectorAll("span"), {
+      y: 50,
+      opacity: 0,
+      stagger: 0.05,
+      duration: 0.6,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: text,
+        start: "top 80%"
+      }
+    });
+  });
+
+  // Card stagger animation
+  gsap.utils.toArray(".fitur-card, .admin-card, .gallery-item, .rank-card, .rate-card")
+  .forEach(section => {
+    gsap.from(section, {
+      scrollTrigger: {
+        trigger: section,
+        start: "top 85%",
+        toggleActions: "play none none none"
+      },
+      y: 60,
+      autoAlpha: 0,
+      duration: 0.8,
+      ease: "power2.out",
+      immediateRender: false
+    });
+  });
+
+  // Owner section zoom
+  gsap.from(".owner", {
+    scrollTrigger: {
+      trigger: ".owner",
       start: "top 80%"
     },
-    y: 60,
+    scale: 0.95,
     opacity: 0,
-    duration: 1,
+    duration: 1.2,
     ease: "power3.out"
   });
-});
-
-// ===== CARD STAGGER ANIMATION =====
-gsap.utils.toArray(".fitur-card, .admin-card, .gallery-item, .rank-card")
-.forEach(section => {
-  gsap.from(section, {
-    scrollTrigger: {
-      trigger: section,
-      start: "top 85%",
-      toggleActions: "play none none none"
-    },
-    y: 60,
-    autoAlpha: 0,
-    duration: 0.8,
-    ease: "power2.out",
-    immediateRender: false
-  });
-});
-
-// ===== OWNER SECTION SMOOTH ZOOM =====
-gsap.from(".owner", {
-  scrollTrigger: {
-    trigger: ".owner",
-    start: "top 80%"
-  },
-  scale: 0.95,
-  opacity: 0,
-  duration: 1.2,
-  ease: "power3.out"
-});
-
-ScrollTrigger.config({
-  autoRefreshEvents: "visibilitychange,DOMContentLoaded,load,resize"
-});
-
-function closePopup(){
-    popup.style.display = "none";
-    selectedPackage = "";
 }
 
-window.addEventListener("click", function(e){
-    if(e.target === popup){
-        closePopup();
-    }
-});
+// Logo mouse move effect (hanya desktop)
+if (!isMobile) {
+  const logo = document.querySelector(".logo");
+  document.addEventListener("mousemove", (e) => {
+    let x = (window.innerWidth / 2 - e.pageX) / 40;
+    let y = (window.innerHeight / 2 - e.pageY) / 40;
+    logo.style.transform = `translate(${x}px, ${y}px)`;
+  });
+}
 
+// Refresh ScrollTrigger on load
 window.addEventListener("load", () => {
   ScrollTrigger.refresh();
 });
 
-const logo = document.querySelector(".logo");
+// Prevent elastic scroll overscroll di iOS
+document.addEventListener('touchmove', function(e) {
+  if (e.touches.length > 1) {
+    e.preventDefault();
+  }
+}, { passive: false });
 
-document.addEventListener("mousemove", (e) => {
-  let x = (window.innerWidth / 2 - e.pageX) / 40;
-  let y = (window.innerHeight / 2 - e.pageY) / 40;
-  logo.style.transform = `translate(${x}px, ${y}px)`;
-});
+console.log("Calmionix Website - Mobile Optimized");
 </script>
 
 </body>
