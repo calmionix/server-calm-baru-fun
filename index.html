@@ -31,10 +31,6 @@ section{
   position:relative;
 }
 
-.hero-top-menu{
-  z-index: 1003;
-}
-
 section::after{
   content:"";
   position:absolute;
@@ -115,12 +111,13 @@ pointer-events:auto;   /* TAMBAH INI */
 /* ================= HERO ================= */
 
 .hero{
-  min-height:100vh;
-  padding:120px 20px 60px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+position:relative;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+overflow:hidden;
 }
 
 .hero-bg{
@@ -176,8 +173,7 @@ z-index:2;
 }
 
 .hero-content img.logo{
-  width:100%;
-  max-width:850px;
+  width:850px;
   margin-bottom:25px;
   animation:floating 4s ease-in-out infinite;
   transition:0.4s;
@@ -671,20 +667,25 @@ display:none;
 
 /* ================= HERO TOP MENU ================= */
 
-@media (max-width:768px){
+.hero-top-menu{
+position:absolute;
+top:25px;
+right:50px;
+z-index:1002;
+display:flex;
+gap:15px;
+}
 
-  .hero-top-menu{
-    position:absolute;
-    top:20px;
-    right:20px;   /* lebih kecil dari 50px */
-    gap:8px;
-  }
-
-  .hero-top-menu a{
-    padding:8px 14px;
-    font-size:11px;
-  }
-
+.hero-top-menu a{
+padding:10px 22px;
+border-radius:30px;
+background:rgba(255,255,255,0.12);
+backdrop-filter:blur(10px);
+color:white;
+text-decoration:none;
+font-weight:600;
+font-size:14px;
+transition:0.3s;
 }
 
 .hero-top-menu a:hover{
@@ -721,7 +722,7 @@ transform:translateY(-3px);
 /* ================= POPUP RANK ================= */
 
 .popup {
-  isolation: isolate;
+  solation: isolate;
   position: fixed;
   top: 0;
   left: 0;
@@ -980,17 +981,9 @@ grid-template-columns:1fr;
 }
 
 /* ADMIN */
-@media (max-width:768px){
-
-  .admin-grid{
-    justify-content:center;
-  }
-
-  .admin-card{
-    min-width:45%;
-    max-width:45%;
-  }
-
+.admin-card{
+min-width:140px;
+max-width:140px;
 }
 
 /* GALLERY */
@@ -1447,14 +1440,7 @@ gsap.to("#parallax", {
 /* ================= GALLERY SLIDE ================= */
 const galleryTrack = document.getElementById("galleryTrack");
 let pos = 0;
-let itemWidth;
-
-function updateWidth(){
-  itemWidth = document.querySelector(".gallery-item").offsetWidth + 20;
-}
-
-updateWidth();
-window.addEventListener("resize", updateWidth);
+const itemWidth = 320;
 const totalItems = galleryTrack.children.length;
 const visibleItems = 3;
 const maxScroll = -(itemWidth * (totalItems - visibleItems));
