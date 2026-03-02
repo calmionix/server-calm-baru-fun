@@ -617,6 +617,81 @@ transform:scale(1.05);
 box-shadow:0 0 20px rgba(90,90,255,0.6);
 }
 
+/* ================= ENDORSE PRO ================= */
+
+.endorse-section{
+  padding:90px 20px;
+  background:linear-gradient(135deg,#0b1c2d,#122d4b);
+  text-align:center;
+}
+
+.endorse-subtitle{
+  max-width:600px;
+  margin:10px auto 50px;
+  opacity:0.7;
+  font-size:15px;
+}
+
+.endorse-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:30px;
+  max-width:1100px;
+  margin:auto;
+}
+
+.endorse-card{
+  background:rgba(255,255,255,0.04);
+  border-radius:25px;
+  padding:30px 20px;
+  backdrop-filter:blur(15px);
+  transition:0.4s;
+  cursor:pointer;
+  border:1px solid rgba(255,255,255,0.05);
+}
+
+.endorse-logo-wrapper{
+  width:100%;
+  aspect-ratio:1/1; /* FIX 1:1 */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:18px;
+}
+
+.endorse-logo-wrapper img{
+  max-width:80%;
+  max-height:80%;
+  object-fit:contain;
+  filter:grayscale(100%) brightness(0.8);
+  transition:0.4s;
+}
+
+.endorse-card h4{
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:0.5px;
+  opacity:0.8;
+  transition:0.3s;
+}
+
+/* Hover Effect Premium */
+.endorse-card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 15px 40px rgba(0,191,255,0.25);
+  border:1px solid rgba(0,191,255,0.4);
+}
+
+.endorse-card:hover img{
+  filter:grayscale(0%) brightness(1);
+  transform:scale(1.1);
+}
+
+.endorse-card:hover h4{
+  opacity:1;
+  color:#00bfff;
+}
+
 /* ================= RATE ================= */
 
 .rate-section{
@@ -1269,6 +1344,88 @@ Follow & Ikuti Komunitas Calmionix
 </div>
 </section>
 
+<section class="endorse-section" id="endorse">
+<h2 class="split-text">TRUSTED BY</h2>
+<p class="endorse-subtitle">
+Server-server yang telah mempercayakan Calmionix untuk review & endorse.
+</p>
+
+<div class="endorse-grid">
+
+<div class="endorse-card">
+<div class="endorse-logo-wrapper">
+<img src="assets/silvavita.jpeg" alt="Silvavita SMP">
+</div>
+<h4>Silvavita SMP</h4>
+</div>
+
+<div class="endorse-card">
+<div class="endorse-logo-wrapper">
+<img src="assets/cyclop.jpeg" alt="Cyclop Legend">
+</div>
+<h4>Cyclop Legend</h4>
+</div>
+
+<div class="endorse-card">
+<div class="endorse-logo-wrapper">
+<img src="assets/falencraft.jpeg" alt="Falencraft SMP">
+</div>
+<h4>NAN SMP</h4>
+</div>
+
+<div class="endorse-card">
+<div class="endorse-logo-wrapper">
+<img src="assets/marlin.jpeg" alt="Marlin MC">
+</div>
+<h4>Marlin MC</h4>
+</div>
+
+<div class="endorse-card">
+<div class="endorse-logo-wrapper">
+<img src="assets/lety.jpeg" alt="Lety Craft">
+</div>
+<h4>Lety Craft</h4>
+</div>
+
+<div class="endorse-card">
+<div class="endorse-logo-wrapper">
+<img src="assets/hypix.jpeg" alt="Hypix SMP">
+</div>
+<h4>Hypix SMP</h4>
+</div>
+
+<div class="endorse-card">
+<div class="endorse-logo-wrapper">
+<img src="assets/voxen.jpeg" alt="Voxen SMP">
+</div>
+<h4>Voxen SMP</h4>
+</div>
+
+<div class="endorse-card">
+<div class="endorse-logo-wrapper">
+<img src="assets/axero.jpeg" alt="AxeroMC">
+</div>
+<h4>AxeroMC</h4>
+</div>
+
+<div class="endorse-card">
+<div class="endorse-logo-wrapper">
+<img src="assets/zeetex.jpeg" alt="Zeetex Legend">
+</div>
+<h4>Zeetex Legend</h4>
+</div>
+
+<div class="endorse-card">
+<div class="endorse-logo-wrapper">
+<img src="assets/cloud.jpeg" alt="Cloud SMP">
+</div>
+<h4>Cloud SMP</h4>
+</div>
+
+</div>
+
+</section>
+
 <section id="rate" class="rate-section">
 <h2>RATE CARD</h2>
 
@@ -1664,7 +1821,7 @@ if (!isMobile) {
   });
 
   // Card stagger animation
-  gsap.utils.toArray(".fitur-card, .admin-card, .gallery-item, .rank-card, .rate-card")
+ gsap.utils.toArray(".fitur-card, .admin-card, .gallery-item, .rank-card, .rate-card, .endorse-card")
   .forEach(section => {
     gsap.from(section, {
       scrollTrigger: {
