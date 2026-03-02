@@ -102,6 +102,11 @@ opacity:1;
 pointer-events:auto;
 }
 
+.overlay,
+.animation-layer {
+    pointer-events: none;
+}
+
 /* ================= HERO ================= */
 
 .hero{
@@ -803,6 +808,12 @@ font-size:14px;
 background:#0099cc;
 }
 
+.rate-card button,
+.rate-card a {
+    position: relative;
+    z-index: 10;
+}
+
 /* ================= FLOAT BUTTONS ================= */
 
 .floating-wa{
@@ -1159,7 +1170,7 @@ body{
 <br>
 <img src="assets/ip-port.png" class="ipbox" onclick="copyIP()" alt="IP Server">
 <div class="hero-options">
-  <a href="#fitur" class="hero-btn">SERVER LIST</a>
+  <a href="#endorse" class="hero-btn">SERVER LIST</a>
   <a href="#rate" class="hero-btn">ENDORSE</a>
 </div>
 </section>
